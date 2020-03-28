@@ -10,14 +10,14 @@ const CollectionsSchema = new Schema({
   },
   title: {
     type: String,
-    required: true,
     trim: true
   },
-  overview: { type: String, required: true },
-  year: { type: String, required: true },
-  poster: { type: String, required: true },
-  rating: { type: Number, required: true },
-  date: { type: Date, required: true }
+  overview: { type: String },
+  year: { type: String },
+  poster: { type: String },
+  rating: { type: Number },
+  movieId: { type: Number },
+  date: { type: Date, default: Date.now }
 });
 
 const Collections = mongoose.model("collections", CollectionsSchema);
