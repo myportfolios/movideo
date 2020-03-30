@@ -6,23 +6,20 @@ const passport = require("passport");
 const Collections = require("../../models/Collections");
 const requireAuth = passport.authenticate("jwt", { session: false });
 
+/**if user._id === collections.user */
 // @route GET api/collections/test
 // @desc Test collections route
 // @access Private
 router.get("/test", (req, res) => res.json({ msg: "Collection Works" }));
 
-/*******get all saved movies in Database endpoint**********/
+/*******get all saved movies for a particular user in Database endpoint**********/
 // @route GET api/collections/test
 // @desc Test collections route
 // @access Private
-/****Below ode commented out****/
-// router.get("/", (req, res) => {
-// Collections.find()
-//   .then(users => res.json(users))
-//   .catch(err => res.status(400).json("Error: " + err));
-// });
-router.get("/", requireAuth, (req, res) => {
-  Collections.find()
+
+router.get("/movies/:user", requireAuth, (req, res) => {
+  // const userId = req.user._id;
+  Collections.find({ user: req.params.user })
     .then(movies => res.json(movies))
     .catch(err => res.status(400).json("Error: " + err));
 });
@@ -57,7 +54,8 @@ router.post("/add", requireAuth, (req, res) => {
 
 /*******get a particular movie using its ID endpoint**********/
 
-router.get("/:movieId", requireAuth, (req, res) => {
+router.get("/movie/:movieId", requireAuth, (req, res) => {
+  // Collections.find({ movieId: req.params.movieId })
   Collections.find({ movieId: req.params.movieId })
     .then(movies => res.json(movies))
     .catch(err => res.status(400).json(`Error ${err}`));
@@ -70,8 +68,8 @@ router.get("/:movieId", requireAuth, (req, res) => {
 //     .catch(err => res.status(400).json(`Error ${err}`));
 // });
 
-router.delete("/:_id", requireAuth, (req, res) => {
-  Collections.find({ user: req.user.id })
+router.delete("/:movieId", requireAuth, (req, res) => {
+  Collections.find({ user: req.user.movieId })
     .delete()
     .then(() => res.json("Movie Deleted"))
     .catch(err => res.status(400).json(`Error ${err}`));
