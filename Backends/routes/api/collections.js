@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const passport = require("passport");
 
 const Collections = require("../../models/Collections");
+const User = require("../../models/User");
 const requireAuth = passport.authenticate("jwt", { session: false });
 
 /**if user._id === collections.user */
@@ -19,9 +19,18 @@ router.get("/test", (req, res) => res.json({ msg: "Collection Works" }));
 
 router.get("/movies/:user", requireAuth, (req, res) => {
   // const userId = req.user._id;
-  Collections.find({ user: req.params.user })
-    .then(movies => res.json(movies))
-    .catch(err => res.status(400).json("Error: " + err));
+  User.findOne({ id: req.user.id }).then(user => {
+    Collections.findOne({ user: req.params.user })
+      .then(collections => {
+        if (collections.user.toString() !== req.user.id) {
+          return res.status(401).json({ notauthorized: "User not authorized" });
+        }
+
+        res.json(collections);
+      })
+
+      .catch(err => res.status(400).json("Error: " + err));
+  });
 });
 
 /*******add new movies endpoint**********/
