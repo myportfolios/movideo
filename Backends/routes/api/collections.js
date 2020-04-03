@@ -131,8 +131,8 @@ router.get("/movie/:movieId", requireAuth, (req, res) => {
 //     .catch(err => res.status(400).json(`Error ${err}`));
 // });
 
-router.delete("/movies/:movieId", requireAuth, (req, res) => {
-  Collections.find({ movieId: req.params.movieId })
+router.delete("/movies/logged-user/:movieId", requireAuth, (req, res) => {
+  Collections.find({ user: req.user.id, movieId: req.params.movieId })
     .deleteOne()
     .then(() => res.json("Movie Deleted"))
     .catch(err => res.status(400).json(`Error ${err}`));
