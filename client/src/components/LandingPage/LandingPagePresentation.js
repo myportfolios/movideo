@@ -6,6 +6,8 @@ export default function LandingPagePresentation({ imagesList }) {
   let imagesListJSX = imagesList?.map(item => {
     // console.log(`${BASE_URL}${POSTER_SIZES}${item.images}`);
     let imageSrc = `${BASE_URL}${POSTER_SIZES}${item.images}`;
+    console.log("imageSrc", imageSrc);
+    console.log("imageSrc", typeof imageSrc);
     return (
       // <Card>
       <img src={imageSrc} alt="image" />

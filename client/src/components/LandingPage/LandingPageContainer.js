@@ -8,16 +8,24 @@ import { getViewPort } from "utilities/utils";
 import { getLatestMoviesImages } from "store/selectors/latestMovies";
 
 class LandingPageContainer extends Component {
+  state = {
+    viewport: {}
+  };
   //get all recent movies when page loads
-  componentDidMount() {
-    // let viewport = getViewPort();
+  async componentDidMount() {
+    this.state.viewport = getViewPort();
     // console.log("viewport", viewport);
     //call getLatestMovies api
-    this.props.fetchLatestMovies(API_URL.latestMovies);
+    await this.props.fetchLatestMovies(API_URL.latestMovies);
+    // await this.setState({ viewport: this.state.viewport });
   }
   render() {
     const { imagesList } = this.props;
-    return <LandingPagePresentation imagesList={imagesList} />;
+    const { viewport } = this.state;
+    console.log(viewport);
+    return (
+      <LandingPagePresentation imagesList={imagesList} viewport={viewport} />
+    );
   }
 }
 
