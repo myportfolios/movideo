@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <LandingPageContainer style={{ height: "100vh" }} />
+        <LandingPageContainer />
       </header>
     </div>
   );

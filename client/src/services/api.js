@@ -6,4 +6,4 @@ export const API_URL = {
 //CONFIGURATION API FOR MOVIES ENDPOINT//
 export const BASE_URL = "http://image.tmdb.org/t/p/";
 // export const POSTER_SIZES = "w500";
-export const POSTER_SIZES = "w200";
+export const POSTER_SIZES = "w500";

@@ -1,0 +1,29 @@
+.landing-container {
+  background-color: red;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  padding: 0px;
+  margin: 0px;
+  opacity: 0.1;
+}
+
+.landing-presentation {
+  background-color: yellow;
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  left: inherit;
+  top: inherit;
+  padding: inherit;
+  margin: inherit;
+  overflow-x: hidden;
+  z-index: -1;
+
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  //   grid-gap: 20px;
+}
