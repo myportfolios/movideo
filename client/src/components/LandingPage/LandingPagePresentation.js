@@ -44,22 +44,22 @@ export const renderWelcomeBox = () => {
     <div className="render-welcome-box">
       <h2>Welcome Text</h2>
       <h5>Register or Sign In to create collection of movies</h5>
-      <MenuBtnComponent
-        render={({ register, signIn }) => (
+      <MenuBtnComponent>
+        {({ register, signIn }) => (
           <div>
             <button>{register}</button>
             <button>{signIn}</button>
           </div>
         )}
-      />
+      </MenuBtnComponent>
     </div>
   );
 };
 
-export const MenuBtnComponent = ({ render }) => {
+export const MenuBtnComponent = ({ children }) => {
   let labels = {
     register: "Register",
     signIn: "Sign In"
   };
-  return render(labels);
+  return children(labels);
 };
