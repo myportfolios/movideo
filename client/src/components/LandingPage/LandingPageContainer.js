@@ -22,7 +22,7 @@ class LandingPageContainer extends Component {
   render() {
     const { imagesList } = this.props;
     const { viewport } = this.state;
-    console.log(viewport);
+    console.log(imagesList);
     return (
       <div className="landing-container">
         <LandingPagePresentation imagesList={imagesList} viewport={viewport} />

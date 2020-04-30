@@ -5,39 +5,13 @@ import { BASE_URL, POSTER_SIZES } from "services/api";
 import "./landing-page.scss";
 
 export default function LandingPagePresentation({ imagesList, viewport }) {
-  // let POSTER_SIZES = getPosterSizeFromViewport(viewport);
-  let imagesListJSX = imagesList?.map(item => {
-    // console.log(`${BASE_URL}${POSTER_SIZES}${item.images}`);
-    let imageSrc = `${BASE_URL}${POSTER_SIZES}${item.images}`;
-    // console.log("imageSrc", imageSrc);
-    // console.log("imageSrc", typeof imageSrc);
-    return (
-      // <Card>
-
-      <img
-        src={imageSrc}
-        alt="image"
-        key={item.images}
-        style={{ opacity: "0.1" }}
-      />
-
-      // </Card>
-    );
-  });
-
   return (
-    <div className="landing-presentation">
-      {imagesListJSX}
+    <div>
+      <ImagesTable imagesList={imagesList} />
       {renderWelcomeBox()}
     </div>
   );
 }
-
-// const getPosterSizeFromViewport = viewport => {
-//   let posterSize = Math.floor(viewport.viewportwidth / 2);
-//   console.log(posterSize);
-//   return posterSize;
-// };
 
 export const renderWelcomeBox = () => {
   return (
@@ -62,4 +36,25 @@ export const MenuBtnComponent = ({ children }) => {
     signIn: "Sign In"
   };
   return children(labels);
+};
+export const ImagesTable = ({ imagesList }) => {
+  let imagesListJSX = imagesList?.map((item, index) => {
+    let imageSrc = `${BASE_URL}${POSTER_SIZES}${item.images}`;
+    return (
+      <img
+        src={imageSrc}
+        alt="image"
+        key={item.images}
+        style={{ opacity: "0.1" }}
+      />
+    );
+  });
+  return (
+    <div
+      className="images-gallery"
+      // style={{ width: "1710px", margin: "0 auto" }}
+    >
+      {imagesListJSX}
+    </div>
+  );
 };

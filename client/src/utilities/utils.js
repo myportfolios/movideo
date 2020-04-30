@@ -8,7 +8,7 @@ export const getViewPort = () => {
     viewportwidth: null,
     viewportheight: null
   };
-  if (typeof window.innerWidth != "undefined") {
+  if (typeof window.innerWidth !== "undefined") {
     viewport.viewportwidth = window.innerWidth;
     viewport.viewportheight = window.innerHeight;
   }

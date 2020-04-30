@@ -7,9 +7,21 @@ export const getLatestMoviesImages = createSelector(
   ],
   moviesListArray => {
     // const movieImages = moviesListArray.map(movieList => movieList.poster_path);
-    let movieImages =
+    let size = 10;
+    let randomMImages =
       moviesListArray &&
-      moviesListArray.map(movieList => {
+      moviesListArray.slice(0, size).map(() => {
+        return (
+          moviesListArray &&
+          moviesListArray.splice(
+            Math.floor(Math.random() * moviesListArray.length),
+            1
+          )[0]
+        );
+      });
+    let movieImages =
+      randomMImages &&
+      randomMImages.map(movieList => {
         return {
           images: movieList.poster_path
         };
