@@ -4,7 +4,7 @@ import { BASE_URL, POSTER_SIZES } from "services/api";
 
 import "./landing-page.scss";
 
-export default function LandingPagePresentation({ imagesList, viewport }) {
+export default function LandingPagePresentation({ imagesList }) {
   return (
     <div>
       <ImagesTable imagesList={imagesList} />

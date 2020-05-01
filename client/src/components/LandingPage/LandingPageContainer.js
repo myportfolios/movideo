@@ -4,28 +4,58 @@ import { API_URL } from "services/api";
 import { fetchLatestMovies } from "store/actions/latestMovies";
 import { connect } from "react-redux";
 import { getViewPort } from "utilities/utils";
+import getViewPortAction from "store/actions/viewport";
 
 import { getLatestMoviesImages } from "store/selectors/latestMovies";
 
 class LandingPageContainer extends Component {
   state = {
-    viewport: {}
+    width: 0,
+    height: 0
   };
   //get all recent movies when page loads
   async componentDidMount() {
-    this.state.viewport = getViewPort();
-    // console.log("viewport", viewport);
+    console.log(window);
+    let viewport = window.addEventListener(
+      "resize",
+      this.getChangesInWindowSize
+    );
+    // let viewport = getViewPort();
+    this.props.getViewPortAction(viewport);
     //call getLatestMovies api
     await this.props.fetchLatestMovies(API_URL.latestMovies);
-    // await this.setState({ viewport: this.state.viewport });
+    // this.getChangesInWindowSize();
   }
+  componentDidUpdate() {
+    let viewport = window.addEventListener(
+      "resize",
+      this.getChangesInWindowSize
+    );
+  }
+
+  componentWillUnmount() {
+    let viewport = window.removeEventListener(
+      "resize",
+      this.getChangesInWindowSize
+    );
+    this.props.getViewPortAction(viewport);
+  }
+
+  // async componentDidUpdate() {
+  //   let viewport = getViewPort();
+  //   this.props.getViewPortAction(viewport);
+  // }
+  //getting window size changes
+  getChangesInWindowSize = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  };
+
   render() {
     const { imagesList } = this.props;
-    const { viewport } = this.state;
-    console.log(imagesList);
+
     return (
       <div className="landing-container">
-        <LandingPagePresentation imagesList={imagesList} viewport={viewport} />
+        <LandingPagePresentation imagesList={imagesList} />
       </div>
     );
   }
@@ -37,6 +67,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchLatestMovies })(
-  LandingPageContainer
-);
+export default connect(mapStateToProps, {
+  fetchLatestMovies,
+  getViewPortAction
+})(LandingPageContainer);

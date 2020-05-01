@@ -32,9 +32,11 @@
   transform: translate -50%, -50%;
 }
 .images-gallery {
-  width: 100%;
+  border: 2px solid white;
+  width: 80%;
   display: grid;
   grid-template-columns: repeat(auto-fit, 342px);
   grid-template-rows: repeat(2, 513px);
   justify-content: center;
+  margin: 0 auto;
 }
