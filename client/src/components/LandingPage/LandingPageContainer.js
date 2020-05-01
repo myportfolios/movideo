@@ -10,44 +10,41 @@ import { getLatestMoviesImages } from "store/selectors/latestMovies";
 
 class LandingPageContainer extends Component {
   state = {
-    width: 0,
-    height: 0
+    viewportWidth: 0,
+    viewportHeight: 0
   };
   //get all recent movies when page loads
+
   async componentDidMount() {
-    console.log(window);
-    let viewport = window.addEventListener(
-      "resize",
-      this.getChangesInWindowSize
-    );
-    // let viewport = getViewPort();
+    //call the getViewPort function for sizes on load of page
+    let viewport = getViewPort();
+    //save the viewport sizes to store
     this.props.getViewPortAction(viewport);
     //call getLatestMovies api
     await this.props.fetchLatestMovies(API_URL.latestMovies);
-    // this.getChangesInWindowSize();
-  }
-  componentDidUpdate() {
-    let viewport = window.addEventListener(
-      "resize",
-      this.getChangesInWindowSize
-    );
   }
 
   componentWillUnmount() {
-    let viewport = window.removeEventListener(
-      "resize",
-      this.getChangesInWindowSize
-    );
+    window.removeEventListener("resize", this.getChangesInWindowSize);
+  }
+  componentDidUpdate() {
+    //check if prevProps and state changes
+    const { viewportWidth, viewportHeight } = this.state;
+    const viewport = {
+      viewportWidth,
+      viewportHeight
+    };
+    window.addEventListener("resize", this.getChangesInWindowSize);
     this.props.getViewPortAction(viewport);
+    console.log("viewport  is", viewport);
   }
 
-  // async componentDidUpdate() {
-  //   let viewport = getViewPort();
-  //   this.props.getViewPortAction(viewport);
-  // }
   //getting window size changes
   getChangesInWindowSize = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    this.setState({
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight
+    });
   };
 
   render() {

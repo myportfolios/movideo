@@ -5,12 +5,12 @@
 
 export const getViewPort = () => {
   let viewport = {
-    viewportwidth: null,
-    viewportheight: null
+    viewportWidth: null,
+    viewportHeight: null
   };
   if (typeof window.innerWidth !== "undefined") {
-    viewport.viewportwidth = window.innerWidth;
-    viewport.viewportheight = window.innerHeight;
+    viewport.viewportWidth = window.innerWidth;
+    viewport.viewportHeight = window.innerHeight;
   }
   return viewport;
 };
