@@ -27,7 +27,7 @@ class LandingPageContainer extends Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.getChangesInWindowSize);
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     //check if prevProps and state changes
     const { viewportWidth, viewportHeight } = this.state;
     const viewport = {
@@ -35,8 +35,9 @@ class LandingPageContainer extends Component {
       viewportHeight
     };
     window.addEventListener("resize", this.getChangesInWindowSize);
-    this.props.getViewPortAction(viewport);
-    console.log("viewport  is", viewport);
+    if (this.state.viewportWidth !== prevState.viewportWidth) {
+      this.props.getViewPortAction(viewport);
+    }
   }
 
   //getting window size changes

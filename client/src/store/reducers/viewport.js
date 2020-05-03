@@ -8,7 +8,6 @@ export const getViewportReducer = (
   switch (action.type) {
     case GET_VIEWPORT:
       const { payload } = action;
-      console.log(payload);
       return {
         payload
       };
