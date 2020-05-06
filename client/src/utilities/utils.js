@@ -15,29 +15,25 @@ export const getViewPort = () => {
   return viewport;
 };
 
-export function getSizeByViewport(viewportWidth) {
-  // debugger;
-  let posterLength;
-  return function (viewportWidth) {
-    if (viewportWidth < 855) {
-      posterLength = 1;
+export function getSizeByViewportWidth(viewportWidth) {
+  let posterLength = 10;
+  if (viewportWidth < 855) {
+    posterLength = 1;
+  }
+  if (viewportWidth > 855) {
+    if (viewportWidth <= 1283) {
+      posterLength = 4;
     }
-    if (viewportWidth > 855) {
-      if (viewportWidth <= 1283) {
-        posterLength = 4;
-      }
+  }
+  if (viewportWidth > 1283) {
+    if (viewportWidth <= 1709) {
+      posterLength = 6;
     }
-    if (viewportWidth > 1283) {
-      if (viewportWidth <= 1709) {
-        posterLength = 6;
-      }
+  }
+  if (viewportWidth > 1709) {
+    if (viewportWidth <= 2138) {
+      posterLength = 8;
     }
-    if (viewportWidth > 1709) {
-      if (viewportWidth <= 2138) {
-        posterLength = 8;
-      }
-    }
-
-    return posterLength;
-  };
+  }
+  return posterLength;
 }

@@ -1,21 +1,15 @@
 import { createSelector } from "reselect";
-import { getSizeByViewport } from "utilities/utils";
 
 export const getLatestMoviesImages = createSelector(
   [
     state =>
       state && state.LatestMoviesReducer && state.LatestMoviesReducer.payload,
-    state =>
-      state.viewport &&
-      state.viewport.payload &&
-      state.viewport.payload.viewportWidth
+    state => state.posterLength.length
   ],
-  (moviesListArray, viewportWidth) => {
-    let size = getSizeByViewport(viewportWidth)(viewportWidth);
-
+  (moviesListArray, posterLength) => {
     let randomMImages =
       moviesListArray &&
-      moviesListArray.slice(0, size).map(() => {
+      moviesListArray.slice(0, posterLength).map(() => {
         return (
           moviesListArray &&
           moviesListArray.splice(
@@ -32,7 +26,6 @@ export const getLatestMoviesImages = createSelector(
           images: movieList.poster_path
         };
       });
-
     return movieImages;
   }
 );
