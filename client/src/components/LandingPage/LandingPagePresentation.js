@@ -45,7 +45,7 @@ export const ImagesTable = ({ imagesList }) => {
         src={imageSrc}
         alt="image"
         key={item.images}
-        style={{ opacity: "0.1" }}
+        style={{ opacity: "0.6" }}
       />
     );
   });
