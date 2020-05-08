@@ -6,12 +6,19 @@ import "./landing-page.scss";
 
 export default function LandingPagePresentation({ imagesList }) {
   let cardProps = ["USERNAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"];
+  let btnProps = {
+    btnName: "Register",
+    btnColor: "blue",
+    btnBgColor: "orange"
+  };
   return (
     <div>
       <ImagesTable imagesList={imagesList} />
       {renderWelcomeBox()}
       <RegistrationLoginComponent />
-      <Card cardProps={cardProps} />
+      <div>
+        <Card cardProps={cardProps} btnProps={btnProps} />
+      </div>
     </div>
   );
 }
