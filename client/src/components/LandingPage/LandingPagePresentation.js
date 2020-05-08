@@ -5,11 +5,13 @@ import { BASE_URL, POSTER_SIZES } from "services/api";
 import "./landing-page.scss";
 
 export default function LandingPagePresentation({ imagesList }) {
+  let cardProps = ["USERNAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"];
   return (
     <div>
       <ImagesTable imagesList={imagesList} />
       {renderWelcomeBox()}
       <RegistrationLoginComponent />
+      <Card cardProps={cardProps} />
     </div>
   );
 }

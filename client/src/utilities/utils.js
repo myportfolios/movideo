@@ -37,3 +37,14 @@ export function getSizeByViewportWidth(viewportWidth) {
   }
   return posterLength;
 }
+
+export function getPlaceholdersFromProps(props) {
+  const placeholderObj = {};
+  if (props && !!props.length) {
+    for (let item of props) {
+      placeholderObj[item] = item;
+    }
+  }
+
+  return placeholderObj;
+}
