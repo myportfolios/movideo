@@ -75,12 +75,24 @@ class LandingPageContainer extends Component {
     });
   };
 
+  loginEventHandler() {
+    alert("logged in");
+  }
+
+  registerEventHandler() {
+    alert("registered");
+  }
+
   render() {
     const { imagesList } = this.props;
 
     return (
       <div className="landing-container">
-        <LandingPagePresentation imagesList={imagesList} />
+        <LandingPagePresentation
+          imagesList={imagesList}
+          loginEventHandler={this.loginEventHandler}
+          registerEventHandler={this.registerEventHandler}
+        />
       </div>
     );
   }

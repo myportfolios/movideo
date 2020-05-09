@@ -4,72 +4,57 @@ import { BASE_URL, POSTER_SIZES } from "services/api";
 
 import "./landing-page.scss";
 
-export default function LandingPagePresentation({ imagesList }) {
-  let cardProps = ["USERNAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"];
+export default function LandingPagePresentation({
+  imagesList,
+  loginEventHandler,
+  registerEventHandler
+}) {
+  let inputProps = ["USERNAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"];
   let btnProps = {
-    btnName: "Register",
+    btnName: "REGISTER",
     btnColor: "blue",
     btnBgColor: "orange"
+  };
+  let headerProps = {
+    headerTitle: "OR REGISTER ACCOUNT",
+    headerColor: "white"
   };
   return (
     <div>
       <ImagesTable imagesList={imagesList} />
-      {renderWelcomeBox()}
-      <RegistrationLoginComponent />
-      <div>
-        <Card cardProps={cardProps} btnProps={btnProps} />
+      <div
+        style={{
+          width: "600px",
+          backgroundColor: "yellow",
+          display: "flex"
+        }}
+        className="registrationLoginDiv"
+      >
+        <Card
+          inputProps={["USERNAME", "PASSWORD"]}
+          btnProps={{
+            btnName: "LOGIN",
+            btnColor: "white",
+            btnBgColor: "blue"
+          }}
+          headerProps={{
+            headerTitle: "LOGIN TO ACCOUNT",
+            headerColor: "white"
+          }}
+          cardColor="red"
+          action={loginEventHandler}
+        />
+        <Card
+          inputProps={inputProps}
+          btnProps={btnProps}
+          headerProps={headerProps}
+          cardColor="green"
+          action={registerEventHandler}
+        />
       </div>
     </div>
   );
 }
-
-export const renderWelcomeBox = () => {
-  return (
-    <div className="render-welcome-box">
-      <h2 className="welcome-header">Movideo</h2>
-      <h5 className="welcome-para">
-        Register or Sign In to create collection of movies
-      </h5>
-      <MenuBtnComponent>
-        {({ register, signIn }) => (
-          <div className="welcome-btns">
-            <button className="btn btn--register">{register}</button>
-            <button className="btn btn--signIn">{signIn}</button>
-          </div>
-        )}
-      </MenuBtnComponent>
-    </div>
-  );
-};
-
-export const RegistrationLoginComponent = () => {
-  return (
-    <div className="registrationLoginDiv">
-      <div className=" inputContainer">
-        <div className="inputContainer--fullname">
-          <h5 className="text">Fullname</h5>
-          <input type="text" name="fullname" placeholder="fullname" />
-        </div>
-        <div className="inputContainer--email">
-          <h5 className="text">Email</h5>
-          <input type="text" name="email" placeholder="email" />
-        </div>
-        <div className="inputContainer--password">
-          <h5 className="text">Password</h5>
-          <input type="text" name="password" placeholder="password" />
-        </div>
-        <div className="inputContainer--confirmPassword">
-          <h5 className="text">Confirm Password</h5>
-          <input
-            type="text"
-            name="confirmPassword"
-            placeholder="confirmPassword"
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export const MenuBtnComponent = ({ children }) => {
   let labels = {
