@@ -8,7 +8,8 @@ export default function Card({
   btnProps,
   headerProps,
   cardColor,
-  action
+  action,
+  id
 }) {
   //props list
   //1.inputProps - determines the number of text input to be rendered. Also adds placeholders
@@ -16,6 +17,7 @@ export default function Card({
   //3.headerProps - contains the title of the card
   //4.cardColor - card bg color
   //5/ action - event handler function
+  //6.id - card id
 
   const placeholders = getPlaceholdersFromProps(inputProps);
   const placeholdersKey = Object.values(placeholders);
@@ -28,10 +30,16 @@ export default function Card({
       style={{
         backgroundColor: cardColor
       }}
+      id={id}
     >
-      {renderCardHeader(headerTitle, headerColor)}
-      {renderPlaceholderJSX(placeholdersKey)}
-      {renderBtnHandler(btnColor, btnName, btnBgColor, action)}
+      <div className="header-grid-item">
+        {renderCardHeader(headerTitle, headerColor)}
+      </div>
+      <div className="input-box">{renderPlaceholderJSX(placeholdersKey)}</div>
+
+      <div className="btn-grid-item">
+        {renderBtnHandler(btnColor, btnName, btnBgColor, action)}
+      </div>
     </div>
   );
 }
@@ -39,13 +47,13 @@ export default function Card({
 function renderBtnHandler(btnColor, btnName, btnBgColor, action) {
   // const { btnColor, btnName } = btnProps;
   return (
-    <span
+    <div
       className="reg-login-btn"
       style={{ color: btnColor, backgroundColor: btnBgColor }}
       onClick={action}
     >
       {btnName}
-    </span>
+    </div>
   );
 }
 function renderPlaceholderJSX(arrToMap) {

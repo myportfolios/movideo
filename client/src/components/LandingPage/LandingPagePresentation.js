@@ -23,11 +23,11 @@ export default function LandingPagePresentation({
     <div>
       <ImagesTable imagesList={imagesList} />
       <div
-        style={{
-          width: "600px",
-          backgroundColor: "yellow",
-          display: "flex"
-        }}
+        // style={{
+        //   width: "600px",
+        //   backgroundColor: "yellow",
+        //   display: "flex"
+        // }}
         className="registrationLoginDiv"
       >
         <Card
@@ -43,6 +43,7 @@ export default function LandingPagePresentation({
           }}
           cardColor="red"
           action={loginEventHandler}
+          id="login"
         />
         <Card
           inputProps={inputProps}
@@ -50,6 +51,7 @@ export default function LandingPagePresentation({
           headerProps={headerProps}
           cardColor="green"
           action={registerEventHandler}
+          id="register"
         />
       </div>
     </div>
