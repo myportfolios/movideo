@@ -1,0 +1,40 @@
+.header {
+  display: grid;
+  grid-template-columns: 20% 70% 10%;
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+
+  &__navs {
+    grid-column: 2/3;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    list-style: none;
+  }
+
+  &__user-auth {
+    grid-column: 3/4;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
+    align-items: center;
+    padding: 0px;
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+    color: blue;
+    cursor: pointer;
+  }
+  li:hover {
+    display: inline-block;
+    border-bottom: 4px solid rgb(175, 115, 4);
+    width: 20%;
+  }
+  .logo {
+    text-align: center;
+    grid-column: 1/2;
+  }
+}
