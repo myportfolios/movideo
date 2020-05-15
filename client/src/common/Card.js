@@ -64,7 +64,14 @@ function renderPlaceholderJSX(arrToMap) {
 }
 function renderCardHeader(headerTitle, headerColor) {
   return (
-    <h2 style={{ color: headerColor, textAlign: "center" }}>{headerTitle}</h2>
+    <h2
+      style={{
+        color: headerColor,
+        textAlign: "center"
+      }}
+    >
+      {headerTitle}
+    </h2>
   );
 }
 

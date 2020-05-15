@@ -8,21 +8,6 @@
   margin: 0px;
 }
 
-.landing-presentation {
-  position: relative;
-  width: inherit;
-  height: inherit;
-  left: inherit;
-  top: inherit;
-  padding: inherit;
-  margin: inherit;
-  display: grid;
-  grid-template-rows: repeat(2, 391px);
-  grid-template-columns: repeat(auto-fit, minmax(342px, 1fr));
-  grid-auto-rows: 391px;
-  background-color: green;
-}
-
 .btn {
   padding: 15px 35px;
   border-radius: 10px;
@@ -31,23 +16,6 @@
   color: #eaa519;
   border-color: #eeb748;
   background-color: white;
-
-  &--register {
-    background-color: white;
-    color: #eaa519;
-    &:hover {
-      background-color: #eaa519;
-      color: white;
-    }
-  }
-  &--signIn {
-    background-color: #eaa519;
-    color: white;
-    &:hover {
-      background-color: white;
-      color: #eaa519;
-    }
-  }
 }
 .images-gallery {
   width: 80%;
@@ -59,7 +27,7 @@
   margin-top: 5%;
 }
 .registrationLoginDiv {
-  position: absolute;
+  position: fixed;
   width: 700px;
   height: 500px;
   left: 50%;
@@ -69,11 +37,13 @@
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(2, 1fr);
+  box-shadow: 0 5px 10px black;
 
   #login {
     display: grid;
     grid-template-rows: 20% 60% 20%;
     padding: 30px;
+    // background-color: white !important;
   }
   #register {
     display: grid;

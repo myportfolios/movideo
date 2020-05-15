@@ -12,8 +12,8 @@ export default function LandingPagePresentation({
   let inputProps = ["USERNAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"];
   let btnProps = {
     btnName: "REGISTER",
-    btnColor: "blue",
-    btnBgColor: "orange"
+    btnColor: "white",
+    btnBgColor: "#4D79FF"
   };
   let headerProps = {
     headerTitle: "OR REGISTER ACCOUNT",
@@ -22,14 +22,7 @@ export default function LandingPagePresentation({
   return (
     <div>
       <ImagesTable imagesList={imagesList} />
-      <div
-        // style={{
-        //   width: "600px",
-        //   backgroundColor: "yellow",
-        //   display: "flex"
-        // }}
-        className="registrationLoginDiv"
-      >
+      <div className="registrationLoginDiv">
         <Card
           inputProps={["USERNAME", "PASSWORD"]}
           btnProps={{
@@ -39,9 +32,9 @@ export default function LandingPagePresentation({
           }}
           headerProps={{
             headerTitle: "LOGIN TO ACCOUNT",
-            headerColor: "white"
+            headerColor: "blue"
           }}
-          cardColor="red"
+          cardColor="white"
           action={loginEventHandler}
           id="login"
         />
@@ -49,7 +42,7 @@ export default function LandingPagePresentation({
           inputProps={inputProps}
           btnProps={btnProps}
           headerProps={headerProps}
-          cardColor="green"
+          cardColor="blue"
           action={registerEventHandler}
           id="register"
         />
@@ -73,7 +66,7 @@ export const ImagesTable = ({ imagesList }) => {
         src={imageSrc}
         alt="image"
         key={item.images}
-        style={{ opacity: "0.6" }}
+        // style={{ opacity: "0.9" }}
       />
     );
   });
