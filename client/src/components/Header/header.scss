@@ -1,16 +1,16 @@
 .header {
   display: grid;
-  grid-template-columns: 20% 70% 10%;
-  position: absolute;
+  grid-template-columns: 10% 80% 10%;
   width: 100%;
   z-index: 999;
 
   &__navs {
     grid-column: 2/3;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(autofit, 1fr);
     align-items: center;
     list-style: none;
+    grid-auto-flow: column;
   }
 
   &__user-auth {
@@ -25,8 +25,12 @@
 
   li {
     display: inline-block;
-    color: blue;
-    cursor: pointer;
+
+    a {
+      text-decoration: none;
+      color: blue;
+      cursor: pointer;
+    }
   }
   li:hover {
     display: inline-block;

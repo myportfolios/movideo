@@ -59,23 +59,9 @@ export const MenuBtnComponent = ({ children }) => {
   return children(labels);
 };
 export const ImagesTable = ({ imagesList }) => {
-  let imagesListJSX = imagesList?.map((item, index) => {
+  let imagesListJSX = imagesList?.map(item => {
     let imageSrc = `${BASE_URL}${POSTER_SIZES}${item.images}`;
-    return (
-      <img
-        src={imageSrc}
-        alt="image"
-        key={item.images}
-        // style={{ opacity: "0.9" }}
-      />
-    );
+    return <img src={imageSrc} alt="image" key={item.images} />;
   });
-  return (
-    <div
-      className="images-gallery"
-      // style={{ width: "1710px", margin: "0 auto" }}
-    >
-      {imagesListJSX}
-    </div>
-  );
+  return <div className="images-gallery">{imagesListJSX}</div>;
 };

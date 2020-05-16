@@ -7,6 +7,7 @@ export const API_URL = {
 export const BASE_URL = "http://image.tmdb.org/t/p/";
 // export const POSTER_SIZES = "w500";
 export const POSTER_SIZES = "w342";
+export const IMAGE_POSTER_SIZES = "w185";
 // export const POSTER_SIZES = "w154";
 // export const POSTER_SIZES = "w185";
 

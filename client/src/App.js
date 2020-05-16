@@ -1,17 +1,24 @@
-import React from "react";
+import React, { Fragment } from "react";
 import LandingPageContainer from "components/LandingPage/LandingPageContainer";
 import Header from "components/Header/Header";
+import RecentMoviesContainer from "components/RecentMovies/RecentMoviesContainer";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Header />
-      </header>
-      <LandingPageContainer />
-    </div>
+    <Fragment>
+      <BrowserRouter>
+        <header className="App-header">
+          <Header />
+        </header>
+        <Switch>
+          <Route path="/" exact component={LandingPageContainer} />
+          <Route path="/recent-movies" component={RecentMoviesContainer} />
+        </Switch>
+      </BrowserRouter>
+    </Fragment>
   );
 }
 

@@ -57,14 +57,7 @@ class LandingPageContainer extends Component {
         updatedViewportState.payload.viewportWidth
       );
       await this.props.posterLengthAction(posterLength);
-      //call getLatestMovies api
-      // await this.props.fetchLatestMovies(API_URL.latestMovies);
     }
-    // imagesList &&
-    //   imagesList.length < 4 &&
-    //   this.state.viewportWidth < 855 &&
-    //   (await this.props.fetchLatestMovies(API_URL.latestMovies));
-    // await this.props.fetchLatestMovies(API_URL.latestMovies);
   }
 
   //getting window size changes
