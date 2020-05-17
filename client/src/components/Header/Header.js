@@ -13,7 +13,7 @@ export default function Header() {
           <a href="./recent-movies">RECENT MOVIES</a>
         </li>
         <li className="navs--cinemas">
-          <a href="">AT CINEMAS</a>
+          <a href="./at-cinemas">AT CINEMAS</a>
         </li>
         <li className="navs--grammys">
           <a href="">GRAMMYs</a>

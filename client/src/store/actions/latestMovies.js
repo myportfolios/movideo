@@ -1,4 +1,5 @@
 import { GET_LATEST_MOVIES } from "services/constants";
+import { API_URL } from "services/api";
 import axios from "axios";
 //using redux-thunk enables us to return a function instead of an action object
 //when the action is called, the dispatch  method takes the action and passes it to our middleware(s) instead of directly
@@ -9,8 +10,8 @@ import axios from "axios";
 //it then calls the dispatch method with a new action with the same "TYPE" and the response from our call
 //becomes the payload
 
-export const fetchLatestMovies = latestMoviesUrl => async dispatch => {
-  const response = await axios.get(latestMoviesUrl);
+export const fetchLatestMovies = () => async dispatch => {
+  const response = await axios.get(API_URL.latestMovies);
 
   dispatch({ type: GET_LATEST_MOVIES, payload: response });
 };

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import RecentMoviesPresentation from "./RecentMoviesPresentation";
-import { API_URL } from "services/api";
 import { fetchLatestMovies } from "store/actions/latestMovies";
 
 class RecentMoviesContainer extends Component {
   async componentDidMount() {
-    await this.props.fetchLatestMovies(API_URL.latestMovies);
+    await this.props.fetchLatestMovies();
   }
   render() {
     const { latestMovies: list } = this.props;
