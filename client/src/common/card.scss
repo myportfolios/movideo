@@ -22,3 +22,8 @@
   //@extend
   border: 3px solid #eeeeee;
 }
+
+//testing css variables
+.navbar {
+  height: var(--nav-size);
+}

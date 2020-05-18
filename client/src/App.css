@@ -1,4 +1,8 @@
 body {
   /* background-color: dimgrey; */
   position: relative;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  /* z-index: -1; */
 }

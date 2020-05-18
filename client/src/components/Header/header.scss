@@ -1,16 +1,20 @@
 .header {
   display: grid;
-  grid-template-columns: 10% 80% 10%;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 1fr;
   width: 100%;
-  z-index: 999;
+  margin-bottom: 10px;
+  height: 100px;
+  background-color: #2e6ae1;
 
   &__navs {
     grid-column: 2/3;
     display: grid;
     grid-template-columns: repeat(autofit, 1fr);
-    align-items: center;
+    margin-top: 2%;
     list-style: none;
     grid-auto-flow: column;
+    justify-content: end;
   }
 
   &__user-auth {
@@ -19,26 +23,54 @@
     grid-template-columns: 50% 50%;
     grid-template-rows: 1fr;
     align-items: center;
-    padding: 0px;
     list-style: none;
+
+    .signIn {
+      text-align: end;
+    }
   }
 
   li {
     display: inline-block;
+    text-align: center;
+    margin: 5px 10px;
 
     a {
       text-decoration: none;
-      color: blue;
       cursor: pointer;
+      color: white;
+      padding: 10px 15px;
     }
   }
-  li:hover {
-    display: inline-block;
-    border-bottom: 4px solid rgb(175, 115, 4);
-    width: 20%;
-  }
+
   .logo {
+    display: grid;
     text-align: center;
     grid-column: 1/2;
+    background-color: white;
+    height: inherit;
+    margin-top: 0;
+    align-items: center;
+    color: #2e6ae1;
+    font-size: 76px;
+  }
+
+  .oscar-box {
+    display: grid;
+    gap: 10px;
+    position: absolute;
+    margin-top: 20px;
+    padding-left: 0;
+
+    li {
+      margin-bottom: 10px;
+      position: relative;
+      margin-left: 0;
+      background-color: #2e6ae1;
+      padding: 10px 0;
+      a {
+        padding: 10px 0 !important;
+      }
+    }
   }
 }
