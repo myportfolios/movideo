@@ -6,7 +6,7 @@ export default function ImageCard({ list, propsObj }) {
   const btnText = propsObj.btnText;
   return (
     <div className="recent-movies-container">
-      {renderImageCardJSX(list, btnText)}
+      {renderImageCardJSX(list || [], btnText || {})}
     </div>
   );
 }

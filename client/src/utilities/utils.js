@@ -3,6 +3,9 @@
 //divide the viewporth width into 10 equal parts
 //divide the viewporth width into 10 equal parts
 
+import { API_URL } from "services/api";
+import { OSCARS } from "services/constants";
+
 export const getViewPort = () => {
   let viewport = {
     viewportWidth: null,
@@ -94,4 +97,32 @@ export function getPlaceholdersFromProps(props) {
 //       </div>
 //     </div>
 //   );
+// };
+
+export const makeOscarCalls = yearString => {
+  // console.log(yearString);
+  // console.log(API_URL.OSCAR_2012);
+  // console.log(OSCARS);
+  //the event returns the year identifier
+  let nominationUrl = "";
+  switch (yearString) {
+    case OSCARS.NOMINATIONS_2009:
+      nominationUrl = API_URL.OCSAR_2009;
+      break;
+    case OSCARS.NOMINATIONS_2010:
+      nominationUrl = API_URL.OSCAR_2010;
+      break;
+    case OSCARS.NOMINATIONS_2011:
+      nominationUrl = API_URL.OSCAR_2011;
+      break;
+    case OSCARS.NOMINATIONS_2012:
+      nominationUrl = API_URL.OSCAR_2012;
+      break;
+  }
+  // console.log(nominationUrl);
+  return nominationUrl;
+};
+
+// export const makeOscarCalls = yearString => {
+//   console.log(yearString);
 // };

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { getOscarNominations } from "store/actions/oscars";
+import { makeOscarCalls } from "utilities/utils";
 import "./header.scss";
 
 export default function Header() {
@@ -27,21 +29,44 @@ export default function Header() {
           <a>OSCARS</a>
           {!!oscarList && (
             <ul className="oscar-box">
-              <li
+              {/* <li
                 id="2012"
                 onClick={e => {
                   console.log(e.target.textContent);
                 }}
+              > */}
+              <li
+                id="2012"
+                onClick={e => {
+                  this.props.getOscarNominations(
+                    makeOscarCalls(e.target.textContent)
+                  );
+                }}
               >
                 <a>2012 NOMINATIONS</a>
               </li>
-              <li id="2011">
+              <li
+                id="2011"
+                onClick={e => {
+                  makeOscarCalls(e.target.textContent);
+                }}
+              >
                 <a>2011 NOMINATIONS</a>
               </li>
-              <li id="2010">
+              <li
+                id="2010"
+                onClick={e => {
+                  makeOscarCalls(e.target.textContent);
+                }}
+              >
                 <a>2010 NOMINATIONS</a>
               </li>
-              <li id="2009">
+              <li
+                id="2009"
+                onClick={e => {
+                  makeOscarCalls(e.target.textContent);
+                }}
+              >
                 <a>2009 NOMINATIONS</a>
               </li>
             </ul>
