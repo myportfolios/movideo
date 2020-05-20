@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import LandingPageContainer from "components/LandingPage/LandingPageContainer";
-import Header from "components/Header/Header";
+import HeaderContainer from "components/Header/HeaderContainer";
 import RecentMoviesContainer from "components/RecentMovies/RecentMoviesContainer";
 import AtCinemasContainer from "components/AtCinemas/AtCinemasContainer";
+import OscarsContainer from "components/Oscars/OscarsContainer";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./App.css";
@@ -12,12 +13,13 @@ function App() {
     <Fragment>
       <BrowserRouter>
         <header className="App-header">
-          <Header />
+          <HeaderContainer />
         </header>
         <Switch>
           <Route path="/" exact component={LandingPageContainer} />
           <Route path="/recent-movies" component={RecentMoviesContainer} />
           <Route path="/at-cinemas" component={AtCinemasContainer} />
+          <Route path="/oscars:id" component={OscarsContainer} />
         </Switch>
       </BrowserRouter>
     </Fragment>
