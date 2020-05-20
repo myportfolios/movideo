@@ -19,7 +19,7 @@ function App() {
           <Route path="/" exact component={LandingPageContainer} />
           <Route path="/recent-movies" component={RecentMoviesContainer} />
           <Route path="/at-cinemas" component={AtCinemasContainer} />
-          <Route path="/oscars:id" component={OscarsContainer} />
+          <Route exact path="/oscars/:oscarsYear" component={OscarsContainer} />
         </Switch>
       </BrowserRouter>
     </Fragment>

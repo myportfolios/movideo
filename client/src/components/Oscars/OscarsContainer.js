@@ -3,10 +3,13 @@ import OscarsPresentation from "./OscarsPresentation";
 import { connect } from "react-redux";
 
 class OscarsContainer extends Component {
+  componentDidMount() {
+    console.log(this.props);
+    console.log("Helloooo");
+  }
   render() {
-    console.log(this.props.oscars);
     const { oscars: list } = this.props;
-    return <OscarsPresentation list={list} />;
+    return <OscarsPresentation list={list} test={this.props} />;
   }
 }
 export const mapStateToProps = state => {

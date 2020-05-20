@@ -6,7 +6,7 @@ import "./recent-movies.scss";
 
 export default function RecentMoviesPresentation({ list }) {
   return (
-    <div style={{ border: "2px solid red" }}>
+    <div>
       <div>
         <ImageCard list={list} propsObj={propsObj} />
       </div>
