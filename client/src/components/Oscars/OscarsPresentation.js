@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ImageCard from "common/ImageCard";
 import { propsObj } from "services/constants";
 
@@ -6,7 +6,16 @@ import { propsObj } from "services/constants";
 //   return <ImageCard list={list} propsObj={propsObj} />;
 // }
 
+//show synopsis onmouseIn or mouseHover
+
 export default function OscarsPresentation(props) {
-  console.log(props);
-  return <h1>Hello</h1>;
+  //   console.log(props);
+  const { list, oscarYear } = props;
+
+  return (
+    <Fragment>
+      <h1>{`Oscar ${oscarYear} Nominations`}</h1>
+      <ImageCard list={list} propsObj={propsObj} />
+    </Fragment>
+  );
 }
