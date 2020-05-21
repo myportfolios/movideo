@@ -1,14 +1,18 @@
 import React from "react";
-import Card from "common/Card";
+import RegistrationLoginCard from "common/RegistrationLoginCard";
 import { BASE_URL, POSTER_SIZES } from "services/api";
 
 import "./landing-page.scss";
 
-export default function LandingPagePresentation({
-  imagesList,
-  loginEventHandler,
-  registerEventHandler
-}) {
+export default function LandingPagePresentation({ imagesList }) {
+  const loginEventHandler = () => {
+    // alert("logged in");
+    console.log("logged into landing page");
+  };
+  const registerEventHandler = () => {
+    // alert("registered");
+    console.log("registered to landing page");
+  };
   let inputProps = ["USERNAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"];
   let btnProps = {
     btnName: "REGISTER",
@@ -19,38 +23,23 @@ export default function LandingPagePresentation({
     headerTitle: "OR REGISTER ACCOUNT",
     headerColor: "white"
   };
+  const props = {
+    loginEventHandler: loginEventHandler,
+    registerEventHandler: registerEventHandler,
+    inputProps: inputProps,
+    btnProps: btnProps,
+    headerProps: headerProps
+  };
+
   return (
     <div>
       <ImagesTable imagesList={imagesList} />
-      <div className="registrationLoginDiv">
-        <Card
-          inputProps={["USERNAME", "PASSWORD"]}
-          btnProps={{
-            btnName: "LOGIN",
-            btnColor: "white",
-            btnBgColor: "blue"
-          }}
-          headerProps={{
-            headerTitle: "LOGIN TO ACCOUNT",
-            headerColor: "blue"
-          }}
-          cardColor="white"
-          action={loginEventHandler}
-          id="login"
-        />
-        <Card
-          inputProps={inputProps}
-          btnProps={btnProps}
-          headerProps={headerProps}
-          cardColor="blue"
-          action={registerEventHandler}
-          id="register"
-        />
-      </div>
+      <RegistrationLoginCard props={props} />
     </div>
   );
 }
 
+/**Render props */
 export const MenuBtnComponent = ({ children }) => {
   let labels = {
     register: "Register",

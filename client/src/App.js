@@ -4,6 +4,7 @@ import HeaderContainer from "components/Header/HeaderContainer";
 import RecentMoviesContainer from "components/RecentMovies/RecentMoviesContainer";
 import AtCinemasContainer from "components/AtCinemas/AtCinemasContainer";
 import OscarsContainer from "components/Oscars/OscarsContainer";
+import LoginRegistrationPage from "components/LoginRegistrationPage/LoginRegistrationPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./App.css";
@@ -20,6 +21,7 @@ function App() {
           <Route path="/recent-movies" component={RecentMoviesContainer} />
           <Route path="/at-cinemas" component={AtCinemasContainer} />
           <Route exact path="/oscars/:oscarsYear" component={OscarsContainer} />
+          <Route exact path="/login" component={LoginRegistrationPage} />
         </Switch>
       </BrowserRouter>
     </Fragment>

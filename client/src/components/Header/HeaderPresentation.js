@@ -84,11 +84,11 @@ export default function Header(props) {
         <li className="navs--collections">
           <Link to="/my-collections">COLLECTIONS</Link>
         </li>
-        <li className="signIn">
-          <Link to="/signIn">SIGN IN</Link>
-        </li>
-        <li className="SignOut">
-          <a href="">SIGN OUT</a>
+        {/* <li className="register">
+          <a href="">REGISTER</a>
+        </li> */}
+        <li className="login">
+          <Link to="/login">LOGIN</Link>
         </li>
       </ul>
     </nav>
