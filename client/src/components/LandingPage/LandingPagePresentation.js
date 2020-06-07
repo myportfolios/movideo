@@ -4,37 +4,54 @@ import { BASE_URL, POSTER_SIZES } from "services/api";
 
 import "./landing-page.scss";
 
-export default function LandingPagePresentation({ imagesList }) {
-  const loginEventHandler = () => {
-    // alert("logged in");
-    console.log("logged into landing page");
+export default function LandingPagePresentation({
+  imagesList,
+  loginEventHandler,
+  registerEventHandler,
+  handleUserInput,
+  errorObj
+}) {
+  const loginProps = {
+    inputProps: ["EMAIL", "PASSWORD"],
+    btnProps: {
+      btnName: "LOGIN",
+      btnColor: "white",
+      btnBgColor: "blue"
+    },
+    headerProps: {
+      headerTitle: "LOGIN TO ACCOUNT",
+      headerColor: "blue"
+    },
+    cardColor: "white",
+    handleUserInput: handleUserInput,
+    loginEventHandler: loginEventHandler,
+    id: "login",
+    errorObj: errorObj
   };
-  const registerEventHandler = () => {
-    // alert("registered");
-    console.log("registered to landing page");
-  };
-  let inputProps = ["USERNAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"];
-  let btnProps = {
-    btnName: "REGISTER",
-    btnColor: "white",
-    btnBgColor: "#4D79FF"
-  };
-  let headerProps = {
-    headerTitle: "OR REGISTER ACCOUNT",
-    headerColor: "white"
-  };
-  const props = {
+  const registerProps = {
     loginEventHandler: loginEventHandler,
     registerEventHandler: registerEventHandler,
-    inputProps: inputProps,
-    btnProps: btnProps,
-    headerProps: headerProps
+    handleUserInput: handleUserInput,
+    inputProps: ["NAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"],
+    btnProps: {
+      btnName: "REGISTER",
+      btnColor: "white",
+      btnBgColor: "#4D79FF"
+    },
+    headerProps: {
+      headerTitle: "OR REGISTER ACCOUNT",
+      headerColor: "white"
+    },
+    errorObj: {}
   };
 
   return (
     <div>
       <ImagesTable imagesList={imagesList} />
-      <RegistrationLoginCard props={props} />
+      <RegistrationLoginCard
+        registerProps={registerProps}
+        loginProps={loginProps}
+      />
     </div>
   );
 }

@@ -6,10 +6,12 @@ const passport = require("passport");
 const collections = require("./routes/api/collections");
 const profile = require("./routes/api/profile");
 const users = require("./routes/api/users");
+const cors = require("cors");
 const app = express();
 
 // Body Parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 app.use(bodyParser.json());
 //DB Config
 const db = require("./config/keys").mongoURI;
@@ -19,10 +21,10 @@ mongoose
   .connect(db, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 // Passport middleware
 app.use(passport.initialize());

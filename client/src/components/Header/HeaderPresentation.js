@@ -10,9 +10,8 @@ import "./header.scss";
  */
 
 export default function Header(props) {
-  const { getOscarNominations } = props;
+  const { getOscarNominations, auth } = props;
   const [oscarList, showOscarList] = useState(false);
-
   return (
     <nav className="header">
       <h1 className="logo">Movideo</h1>
@@ -82,7 +81,7 @@ export default function Header(props) {
           )}
         </li>
         <li className="navs--collections">
-          <Link to="/my-collections">COLLECTIONS</Link>
+          {!!auth && <Link to="/my-collections">COLLECTIONS</Link>}
         </li>
         {/* <li className="register">
           <a href="">REGISTER</a>

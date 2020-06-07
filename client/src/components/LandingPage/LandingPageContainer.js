@@ -68,13 +68,26 @@ class LandingPageContainer extends Component {
     });
   };
 
-  loginEventHandler() {
-    alert("logged in");
-  }
+  loginEventHandler = e => {
+    e.preventDefault();
+    //make api call
+    this.props.loginUserAction(this.state, () => {
+      //redirect user to collections page
+      this.props.history.push("/my-collections");
+    });
+  };
 
-  registerEventHandler() {
-    alert("registered");
-  }
+  registerEventHandler = e => {
+    e.preventDefault();
+    console.log("registered");
+    this.props.registerUserAction(this.state, () => {
+      //redirect user to collections page
+      this.props.history.push("/");
+    });
+  };
+  handleUserInput = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     const { imagesList } = this.props;
@@ -85,6 +98,8 @@ class LandingPageContainer extends Component {
           imagesList={imagesList}
           loginEventHandler={this.loginEventHandler}
           registerEventHandler={this.registerEventHandler}
+          handleUserInput={this.handleUserInput}
+          errorObj={this.props.loginError}
         />
       </div>
     );
@@ -95,7 +110,8 @@ const mapStateToProps = state => {
   return {
     imagesList: getLatestMoviesImages(state),
     posterLength: state.posterLength && state.posterLength.length,
-    viewportWidth: state.viewport && state.viewport.viewportWidth
+    viewportWidth: state.viewport && state.viewport.viewportWidth,
+    loginError: state.auth.errorMessage
   };
 };
 

@@ -42,6 +42,7 @@ export function getSizeByViewportWidth(viewportWidth) {
 }
 
 export function getPlaceholdersFromProps(props) {
+  // props is a list of input fields we want the card to have
   const placeholderObj = {};
   if (props && !!props.length) {
     for (let item of props) {

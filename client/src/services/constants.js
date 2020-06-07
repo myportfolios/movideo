@@ -5,6 +5,11 @@ export const GET_VIEWPORT = "get_viewport";
 export const GET_POSTER_LENGTH = "get_poster_length";
 export const GET_CINEMA_MOVIES = "get_cinema_movies";
 export const GET_OSCARS = "get_oscars";
+export const ACTION_KEY_POST_LOGIN = "action_key_post_login";
+export const ACTION_KEY_POST_LOGIN_ERROR = "action_key_post_login_error";
+export const ACTION_KEY_LOGIN = "action_key_login";
+export const ACTION_KEY_POST_REGISTER_ERROR = "register";
+export const ACTION_KEY_POST_REGISTER = "registration_error";
 
 export const OSCARS = {
   NOMINATIONS_2012: "2012 NOMINATIONS",
@@ -16,4 +21,11 @@ export const OSCARS = {
 //ImageCard object props
 export const propsObj = {
   btnText: "Add To My Collections"
+};
+
+//Registration btn text
+
+export const accountType = {
+  LOGIN: "LOGIN",
+  REGISTER: "REGISTER"
 };

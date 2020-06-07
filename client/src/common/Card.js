@@ -1,15 +1,18 @@
 import React from "react";
 import { getPlaceholdersFromProps } from "utilities/utils";
 import "./card.scss";
+import InputText from "common/InputText";
 import PropTypes from "prop-types";
 
 export default function Card({
+  headerProps,
   inputProps,
   btnProps,
-  headerProps,
   cardColor,
+  handleUserInput,
   action,
-  id
+  id,
+  errorObj
 }) {
   //props list
   //1.inputProps - determines the number of text input to be rendered. Also adds placeholders
@@ -22,8 +25,6 @@ export default function Card({
   const placeholders = getPlaceholdersFromProps(inputProps);
   const placeholdersKey = Object.values(placeholders);
 
-  const { btnColor, btnName, btnBgColor } = btnProps;
-  const { headerTitle, headerColor } = headerProps;
   return (
     <div
       className="Card"
@@ -33,51 +34,107 @@ export default function Card({
       id={id}
     >
       <div className="header-grid-item">
-        {renderCardHeader(headerTitle, headerColor)}
+        {/**Card Header Title */}
+        {renderCardHeader(headerProps)}
       </div>
-      <div className="input-box">{renderPlaceholderJSX(placeholdersKey)}</div>
+      <div className="input-box">
+        {/**Card inputs  */}
+        {renderPlaceholderJSX(placeholdersKey, handleUserInput, errorObj)}
+      </div>
 
       <div className="btn-grid-item">
-        {renderBtnHandler(btnColor, btnName, btnBgColor, action)}
+        {/**Card btn inputs  */}
+        {renderBtnHandler(btnProps, action)}
       </div>
     </div>
   );
 }
 
-function renderBtnHandler(btnColor, btnName, btnBgColor, action) {
-  // const { btnColor, btnName } = btnProps;
+function renderBtnHandler(btnPropsArg, submitAction) {
   return (
     <div
       className="reg-login-btn"
-      style={{ color: btnColor, backgroundColor: btnBgColor }}
-      onClick={action}
+      style={{
+        color: btnPropsArg.btnColor,
+        backgroundColor: btnPropsArg.btnBgColor
+      }}
+      onClick={submitAction}
     >
-      {btnName}
+      {btnPropsArg.btnName}
     </div>
   );
 }
-function renderPlaceholderJSX(arrToMap) {
+function renderPlaceholderJSX(arrToMap, handleUserInputArg, errorObj) {
+  //get type of error from errorObj keys
+  let errorType = errorObj && Object.keys(errorObj).toString();
   let placeholdersJSX = arrToMap.map((item, index) => {
-    return <input type="text" placeholder={`${item}...`} key={index} />;
+    return (
+      <>
+        <InputText
+          // id={`${item}...`}
+          placeholder={`${item}...`}
+          key={index}
+          handleUserInput={handleUserInputArg}
+          name={item.toLowerCase()}
+        />
+
+        {item.toLowerCase() === errorType ? (
+          <div>{toShowError(arrToMap, errorObj)}</div>
+        ) : null}
+      </>
+    );
   });
-  return placeholdersJSX;
+
+  return <>{placeholdersJSX}</>;
 }
-function renderCardHeader(headerTitle, headerColor) {
+function renderCardHeader(headerProps) {
   return (
     <h2
       style={{
-        color: headerColor,
+        color: headerProps.headerColor,
         textAlign: "center"
       }}
     >
-      {headerTitle}
+      {headerProps.headerTitle}
     </h2>
   );
 }
+function toShowError(arrayToMap, errorObject) {
+  let error;
+  for (let ele of arrayToMap) {
+    for (let item in errorObject) {
+      if (ele.toLowerCase() === item) {
+        error = errorObject[item];
+      }
+    }
+  }
 
+  return error;
+}
+
+// function mapErrorToInput(inputOptions, errObj) {
+//   // const error = inputOptions.map(item => console.log(item))
+//   inputOptions.map(item => console.log(item.toLowerCase()));
+//   console.log([errObj]);
+// }
+
+function mapErrorToInput(inputOptions, errObj) {
+  console.log(inputOptions);
+  var error;
+  for (let x in inputOptions) {
+    for (let y in errObj) {
+      if (inputOptions[x].toLowerCase() === y) {
+        error = errObj[y];
+      }
+      // error = inputOptions[x].toLowerCase() === y;
+    }
+  }
+
+  return error;
+}
 Card.propTypes = {
   inputProps: PropTypes.array.isRequired,
   btnProps: PropTypes.object.isRequired,
-  headerProps: PropTypes.object.isRequired,
+  // headerProps: PropTypes.object.isRequired,
   cardColor: PropTypes.string.isRequired
 };

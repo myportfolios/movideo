@@ -14,7 +14,9 @@ export default function OscarsPresentation(props) {
 
   return (
     <Fragment>
-      <h1>{`Oscar ${oscarYear} Nominations`}</h1>
+      <h1
+        style={{ textAlign: "center" }}
+      >{`Oscar ${oscarYear} Nominations`}</h1>
       <ImageCard list={list} propsObj={propsObj} />
     </Fragment>
   );

@@ -1,33 +1,100 @@
-import React from "react";
-import Card from "common/Card";
+import React, { Fragment } from "react";
 import RegistrationLoginCard from "common/RegistrationLoginCard";
+import { accountType } from "services/constants";
+import { loginUserAction, registerUserAction } from "auth/authAction";
+import { connect } from "react-redux";
 
-export default function LoginRegistrationPage() {
-  const loginEventHandler = () => {
-    // alert("logged in");
-    console.log("logged in");
+class LoginRegistrationPage extends React.Component {
+  loginEventHandler = e => {
+    e.preventDefault();
+    //make api call
+
+    this.props.loginUserAction(this.state, () => {
+      //redirect user to collections page
+      this.props.history.push("/my-collections");
+    });
   };
-  const registerEventHandler = () => {
-    // alert("registered");
+
+  registerEventHandler = e => {
+    e.preventDefault();
     console.log("registered");
+    this.props.registerUserAction(this.state, () => {
+      //redirect user to collections page
+      this.props.history.push("/");
+    });
   };
-  let inputProps = ["USERNAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"];
-  let btnProps = {
-    btnName: "REGISTER",
-    btnColor: "white",
-    btnBgColor: "#4D79FF"
+  handleUserInput = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
-  let headerProps = {
-    headerTitle: "OR REGISTER ACCOUNT",
-    headerColor: "white"
-  };
-  const props = {
-    loginEventHandler: loginEventHandler,
-    registerEventHandler: registerEventHandler,
-    inputProps: inputProps,
-    btnProps: btnProps,
-    headerProps: headerProps
-  };
+  render() {
+    //props for login section of card
+    const loginProps = {
+      inputProps: ["EMAIL", "PASSWORD"],
+      btnProps: {
+        btnName: "LOGIN",
+        btnColor: "white",
+        btnBgColor: "blue"
+      },
+      headerProps: {
+        headerTitle: "LOGIN TO ACCOUNT",
+        headerColor: "blue"
+      },
+      cardColor: "white",
+      handleUserInput: this.handleUserInput,
+      loginEventHandler: this.loginEventHandler,
+      id: "login",
+      errorObj: this.props.loginError
+    };
 
-  return <RegistrationLoginCard props={props} />;
+    //props for register section of card
+    const registerProps = {
+      inputProps: ["NAME", "EMAIL", "PASSWORD", "PASSWORD RE-TYPE"],
+      btnProps: {
+        btnName: "REGISTER",
+        btnColor: "white",
+        btnBgColor: "#4D79FF"
+      },
+      headerProps: {
+        headerTitle: "OR REGISTER ACCOUNT",
+        headerColor: "white"
+      },
+      cardColor: "blue",
+      handleUserInput: this.handleUserInput,
+      registerEventHandler: this.registerEventHandler,
+      id: "register",
+      errorObj: this.props.error
+    };
+
+    return (
+      <Fragment>
+        <div style={{ textAlign: "center" }}>
+          <h1>WHY REGISTER?</h1>
+          <h4>
+            {" "}
+            As a registered user, you can create a collection where you can add
+            movies you intend to watch.
+          </h4>
+          <h4>
+            We send out weekly reminders of your collections on Friday nights so
+            you can enjoy your weekends.
+          </h4>
+        </div>
+
+        <RegistrationLoginCard
+          registerProps={registerProps || {}}
+          loginProps={loginProps || {}}
+        />
+      </Fragment>
+    );
+  }
 }
+export const mapStateToProps = state => {
+  return {
+    loginError: state.auth.errorMessage
+  };
+};
+
+export default connect(mapStateToProps, {
+  loginUserAction,
+  registerUserAction
+})(LoginRegistrationPage);

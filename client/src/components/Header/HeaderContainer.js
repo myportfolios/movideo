@@ -5,12 +5,22 @@ import { connect } from "react-redux";
 
 class HeaderContainer extends Component {
   render() {
+    const { auth } = this.props;
+
     return (
       <HeaderPresentation
         getOscarNominations={this.props.getOscarNominations}
+        auth={auth}
       />
     );
   }
 }
 
-export default connect(null, { getOscarNominations })(HeaderContainer);
+export const mapStateToProps = state => {
+  return {
+    auth: state.auth.authenticated
+  };
+};
+export default connect(mapStateToProps, { getOscarNominations })(
+  HeaderContainer
+);
