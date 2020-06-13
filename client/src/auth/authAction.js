@@ -6,6 +6,7 @@ import {
   ACTION_KEY_POST_REGISTER_ERROR
 } from "services/constants";
 import { API_URL } from "services/api";
+import { renameKeys } from "utilities/utils";
 
 // export const loginUserAction = (userDetailsObj, callBack) => async dispatch => {
 //   const response = await axios.post(API_URL.POST_LOGIN, userDetailsObj);
@@ -33,7 +34,11 @@ export const loginUserAction = (userDetailsObj, callBack) => async dispatch => {
     .post(API_URL.POST_LOGIN, userDetailsObj)
     .then(res => {
       if (res) {
-        dispatch({ type: ACTION_KEY_POST_LOGIN, payload: res.data.token });
+        dispatch({
+          type: ACTION_KEY_POST_LOGIN,
+          payload: res.data.token,
+          userAction: userDetailsObj.cardId
+        });
         callBack();
       }
     })
@@ -45,16 +50,20 @@ export const loginUserAction = (userDetailsObj, callBack) => async dispatch => {
     );
 };
 
-export const registerUserAction = (
-  userDetailsObj,
-  callBack
-) => async dispatch => {
+export const registerUserAction = userDetailsObj => async dispatch => {
+  let newPayload = renameKeys(userDetailsObj, {
+    "password re-type": "password2"
+  });
+  console.log(newPayload);
   await axios
-    .post(API_URL.POST_REGISTER, userDetailsObj)
+    .post(API_URL.POST_REGISTER, newPayload)
     .then(res => {
       if (res) {
-        dispatch({ type: ACTION_KEY_POST_REGISTER, payload: res.data.token });
-        callBack();
+        dispatch({
+          type: ACTION_KEY_POST_REGISTER,
+          payload: "Success!",
+          userAction: newPayload.cardId
+        });
       }
     })
     .catch(err =>
@@ -64,3 +73,5 @@ export const registerUserAction = (
       })
     );
 };
+
+//uset setInterval and clearInterval

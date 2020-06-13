@@ -123,7 +123,16 @@ export const makeOscarCalls = yearString => {
   // console.log(nominationUrl);
   return nominationUrl;
 };
-
-// export const makeOscarCalls = yearString => {
-//   console.log(yearString);
-// };
+/***rename keys in an object */
+/**
+ *
+ * obj  - object with key/keys we want to modify
+ * newKeys -  object containing the previous key and the new key
+ */
+export function renameKeys(obj, newKeys) {
+  const keyValues = Object.keys(obj).map(key => {
+    const newKey = newKeys[key] || key;
+    return { [newKey]: obj[key] };
+  });
+  return Object.assign({}, ...keyValues);
+}

@@ -24,6 +24,7 @@ export default function Card({
 
   const placeholders = getPlaceholdersFromProps(inputProps);
   const placeholdersKey = Object.values(placeholders);
+  console.log("errorObj is ", errorObj);
 
   return (
     <div
@@ -39,7 +40,7 @@ export default function Card({
       </div>
       <div className="input-box">
         {/**Card inputs  */}
-        {renderPlaceholderJSX(placeholdersKey, handleUserInput, errorObj)}
+        {renderPlaceholderJSX(placeholdersKey, handleUserInput, errorObj, id)}
       </div>
 
       <div className="btn-grid-item">
@@ -64,14 +65,14 @@ function renderBtnHandler(btnPropsArg, submitAction) {
     </div>
   );
 }
-function renderPlaceholderJSX(arrToMap, handleUserInputArg, errorObj) {
+function renderPlaceholderJSX(arrToMap, handleUserInputArg, errorObj, cardId) {
   //get type of error from errorObj keys
   let errorType = errorObj && Object.keys(errorObj).toString();
   let placeholdersJSX = arrToMap.map((item, index) => {
     return (
       <>
         <InputText
-          // id={`${item}...`}
+          cardId={cardId}
           placeholder={`${item}...`}
           key={index}
           handleUserInput={handleUserInputArg}

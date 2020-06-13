@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { getViewPort, getSizeByViewportWidth } from "utilities/utils";
 import getViewPortAction from "store/actions/viewport";
 import { posterLengthAction } from "store/actions/posterSize";
-
+import { loginUserAction, registerUserAction } from "auth/authAction";
 import { getLatestMoviesImages } from "store/selectors/latestMovies";
 
 class LandingPageContainer extends Component {
@@ -80,10 +80,7 @@ class LandingPageContainer extends Component {
   registerEventHandler = e => {
     e.preventDefault();
     console.log("registered");
-    this.props.registerUserAction(this.state, () => {
-      //redirect user to collections page
-      this.props.history.push("/");
-    });
+    this.props.registerUserAction(this.state);
   };
   handleUserInput = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -118,7 +115,8 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   fetchLatestMovies,
   getViewPortAction,
-  posterLengthAction
+  posterLengthAction,
+  registerUserAction
 })(LandingPageContainer);
 
 //continue to fix y the posterLength gets to zero

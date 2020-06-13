@@ -13,21 +13,23 @@ class LoginRegistrationPage extends React.Component {
       //redirect user to collections page
       this.props.history.push("/my-collections");
     });
+    this.setState({ state: {} });
   };
 
-  registerEventHandler = e => {
-    e.preventDefault();
-    console.log("registered");
-    this.props.registerUserAction(this.state, () => {
-      //redirect user to collections page
-      this.props.history.push("/");
-    });
+  registerEventHandler = () => {
+    this.props.registerUserAction(this.state);
+    this.setState({ state: {} });
   };
   handleUserInput = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    console.log(e.target.id);
+    this.setState(
+      { [e.target.name]: e.target.value, cardId: e.target.id },
+      () => console.log(this.state)
+    );
   };
   render() {
     //props for login section of card
+
     const loginProps = {
       inputProps: ["EMAIL", "PASSWORD"],
       btnProps: {
@@ -62,7 +64,7 @@ class LoginRegistrationPage extends React.Component {
       handleUserInput: this.handleUserInput,
       registerEventHandler: this.registerEventHandler,
       id: "register",
-      errorObj: this.props.error
+      errorObj: this.props.registrationError
     };
 
     return (
@@ -88,9 +90,11 @@ class LoginRegistrationPage extends React.Component {
     );
   }
 }
+
 export const mapStateToProps = state => {
   return {
-    loginError: state.auth.errorMessage
+    loginError: state.auth.errorMessage,
+    registrationError: state.registration.errorMessage
   };
 };
 

@@ -8,8 +8,8 @@ export const GET_OSCARS = "get_oscars";
 export const ACTION_KEY_POST_LOGIN = "action_key_post_login";
 export const ACTION_KEY_POST_LOGIN_ERROR = "action_key_post_login_error";
 export const ACTION_KEY_LOGIN = "action_key_login";
-export const ACTION_KEY_POST_REGISTER_ERROR = "register";
-export const ACTION_KEY_POST_REGISTER = "registration_error";
+export const ACTION_KEY_POST_REGISTER_ERROR = "register_error";
+export const ACTION_KEY_POST_REGISTER = "registration";
 
 export const OSCARS = {
   NOMINATIONS_2012: "2012 NOMINATIONS",

@@ -4,7 +4,7 @@ import { getViewportReducer } from "./viewport";
 import posterLengthReducer from "./posterSize";
 import { atCineaMoviesReducer } from "./atCinemas";
 import { oscarsNominationReducer } from "./oscars";
-import { userAuthReducer } from "auth/authReducers";
+import { userAuthReducer, userRegistrationReducer } from "auth/authReducers";
 
 export default combineReducers({
   LatestMoviesReducer,
@@ -12,5 +12,6 @@ export default combineReducers({
   posterLength: posterLengthReducer,
   atCinemaMovies: atCineaMoviesReducer,
   oscarNominations: oscarsNominationReducer,
-  auth: userAuthReducer
+  auth: userAuthReducer,
+  registration: userRegistrationReducer
 });

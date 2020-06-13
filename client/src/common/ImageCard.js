@@ -23,9 +23,18 @@ function renderImageCardJSX(arrayToMap, btnText) {
             alt="movie poster"
             className="movie-card_poster"
           />
-          <h4 className="movie-card__title">{item.title}</h4>
-          <h4 className="movie-card__rating">{item.vote_average}</h4>
-          <button className="movie-card__save-btn">{btnText}</button>
+          <div className="movie-card_other-items">
+            <h4 className="movie-card_other-items__title">{item.title}</h4>
+            <h4 className="movie-card_other-items__rating">
+              {item.vote_average}
+            </h4>
+            {/* <button className="movie-card_other-items__save-btn">
+              {btnText}
+            </button> */}
+            <a href="#" className="movie-card_other-items__save-btn">
+              Save To Collections
+            </a>
+          </div>
         </div>
       );
     });

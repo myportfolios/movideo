@@ -14,7 +14,7 @@ export default class InputText extends Component {
 
   render() {
     const {
-      id,
+      cardId,
       handleUserInput,
       error,
       placeholder,
@@ -25,7 +25,7 @@ export default class InputText extends Component {
 
     return (
       <input
-        id={id}
+        id={cardId}
         type="text"
         placeholder={placeholder}
         onChange={handleUserInput}
