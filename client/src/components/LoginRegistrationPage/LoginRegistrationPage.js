@@ -1,31 +1,34 @@
 import React, { Fragment } from "react";
 import RegistrationLoginCard from "common/RegistrationLoginCard";
 import { accountType } from "services/constants";
-import { loginUserAction, registerUserAction } from "auth/authAction";
+import {
+  loginUserAction,
+  registerUserAction,
+  clearRegistrationFields
+} from "auth/authAction";
 import { connect } from "react-redux";
 
 class LoginRegistrationPage extends React.Component {
-  loginEventHandler = e => {
-    e.preventDefault();
+  loginEventHandler = () => {
     //make api call
 
     this.props.loginUserAction(this.state, () => {
       //redirect user to collections page
       this.props.history.push("/my-collections");
     });
-    this.setState({ state: {} });
+    this.props.clearRegistrationFields();
+    // this.setState({ email: "", password: "" });
+    // console.log(this.state.email);
+    // console.log(this.state.password);
   };
 
   registerEventHandler = () => {
     this.props.registerUserAction(this.state);
-    this.setState({ state: {} });
+    this.props.clearRegistrationFields();
+    // this.setState({ state: {} });
   };
   handleUserInput = e => {
-    console.log(e.target.id);
-    this.setState(
-      { [e.target.name]: e.target.value, cardId: e.target.id },
-      () => console.log(this.state)
-    );
+    this.setState({ [e.target.name]: e.target.value, cardId: e.target.id });
   };
   render() {
     //props for login section of card
@@ -45,7 +48,8 @@ class LoginRegistrationPage extends React.Component {
       handleUserInput: this.handleUserInput,
       loginEventHandler: this.loginEventHandler,
       id: "login",
-      errorObj: this.props.loginError
+      errorObj: this.props.loginError,
+      cardInputStateObj: this.state && { ...this.state }
     };
 
     //props for register section of card
@@ -64,9 +68,11 @@ class LoginRegistrationPage extends React.Component {
       handleUserInput: this.handleUserInput,
       registerEventHandler: this.registerEventHandler,
       id: "register",
-      errorObj: this.props.registrationError
+      errorObj: this.props.registrationError,
+      cardInputStateObj: this.state && { ...this.state }
     };
-
+    const { loggedInStatus } = this.props;
+    const isLoggedIn = loggedInStatus && !!loggedInStatus.length;
     return (
       <Fragment>
         <div style={{ textAlign: "center" }}>
@@ -82,10 +88,12 @@ class LoginRegistrationPage extends React.Component {
           </h4>
         </div>
 
-        <RegistrationLoginCard
-          registerProps={registerProps || {}}
-          loginProps={loginProps || {}}
-        />
+        {!isLoggedIn && (
+          <RegistrationLoginCard
+            registerProps={registerProps || {}}
+            loginProps={loginProps || {}}
+          />
+        )}
       </Fragment>
     );
   }
@@ -94,11 +102,13 @@ class LoginRegistrationPage extends React.Component {
 export const mapStateToProps = state => {
   return {
     loginError: state.auth.errorMessage,
-    registrationError: state.registration.errorMessage
+    registrationError: state.registration.errorMessage,
+    loggedInStatus: state.auth.authenticated
   };
 };
 
 export default connect(mapStateToProps, {
   loginUserAction,
-  registerUserAction
+  registerUserAction,
+  clearRegistrationFields
 })(LoginRegistrationPage);

@@ -87,7 +87,8 @@ class LandingPageContainer extends Component {
   };
 
   render() {
-    const { imagesList } = this.props;
+    const { imagesList, looggedInStatus } = this.props;
+    const isLoggedIn = looggedInStatus && !!looggedInStatus.length;
 
     return (
       <div className="landing-container">
@@ -97,6 +98,7 @@ class LandingPageContainer extends Component {
           registerEventHandler={this.registerEventHandler}
           handleUserInput={this.handleUserInput}
           errorObj={this.props.loginError}
+          isLoggedIn={isLoggedIn}
         />
       </div>
     );
@@ -108,7 +110,8 @@ const mapStateToProps = state => {
     imagesList: getLatestMoviesImages(state),
     posterLength: state.posterLength && state.posterLength.length,
     viewportWidth: state.viewport && state.viewport.viewportWidth,
-    loginError: state.auth.errorMessage
+    loginError: state.auth.errorMessage,
+    looggedInStatus: state.auth.authenticated
   };
 };
 

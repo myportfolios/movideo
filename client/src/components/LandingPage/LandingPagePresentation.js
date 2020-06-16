@@ -9,7 +9,8 @@ export default function LandingPagePresentation({
   loginEventHandler,
   registerEventHandler,
   handleUserInput,
-  errorObj
+  errorObj,
+  isLoggedIn
 }) {
   const loginProps = {
     inputProps: ["EMAIL", "PASSWORD"],
@@ -48,10 +49,12 @@ export default function LandingPagePresentation({
   return (
     <div>
       <ImagesTable imagesList={imagesList} />
-      <RegistrationLoginCard
-        registerProps={registerProps}
-        loginProps={loginProps}
-      />
+      {!isLoggedIn && (
+        <RegistrationLoginCard
+          registerProps={registerProps}
+          loginProps={loginProps}
+        />
+      )}
     </div>
   );
 }

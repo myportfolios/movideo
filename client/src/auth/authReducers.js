@@ -2,7 +2,8 @@ import {
   ACTION_KEY_POST_LOGIN,
   ACTION_KEY_POST_LOGIN_ERROR,
   ACTION_KEY_POST_REGISTER,
-  ACTION_KEY_POST_REGISTER_ERROR
+  ACTION_KEY_POST_REGISTER_ERROR,
+  SIGN_OUT_USER
 } from "services/constants";
 
 const InitialState = {
@@ -18,6 +19,11 @@ export const userAuthReducer = (state = InitialState, action) => {
         ...state,
         authenticated: action.payload,
         userAction: action.userAction
+      };
+    case SIGN_OUT_USER:
+      return {
+        ...state,
+        authenticated: action.payload
       };
     case ACTION_KEY_POST_LOGIN_ERROR:
       return {

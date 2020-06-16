@@ -21,6 +21,7 @@ export class RegistrationLoginCard extends React.Component {
           action={loginProps.loginEventHandler}
           id={loginProps.id}
           errorObj={loginProps.errorObj}
+          cardInputStateObj={loginProps.cardInputStateObj}
         />
 
         <Card
@@ -32,6 +33,7 @@ export class RegistrationLoginCard extends React.Component {
           action={registerProps.registerEventHandler}
           id={registerProps.id}
           errorObj={registerProps.errorObj}
+          cardInputStateObj={registerProps.cardInputStateObj}
         />
         {!!registrationMsg && renderRegisterMsg(registrationMsg)}
       </div>

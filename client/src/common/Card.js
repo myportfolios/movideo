@@ -12,7 +12,8 @@ export default function Card({
   handleUserInput,
   action,
   id,
-  errorObj
+  errorObj,
+  cardInputStateObj //stateObj
 }) {
   //props list
   //1.inputProps - determines the number of text input to be rendered. Also adds placeholders
@@ -24,7 +25,6 @@ export default function Card({
 
   const placeholders = getPlaceholdersFromProps(inputProps);
   const placeholdersKey = Object.values(placeholders);
-  console.log("errorObj is ", errorObj);
 
   return (
     <div
@@ -40,7 +40,14 @@ export default function Card({
       </div>
       <div className="input-box">
         {/**Card inputs  */}
-        {renderPlaceholderJSX(placeholdersKey, handleUserInput, errorObj, id)}
+        {renderPlaceholderJSX(
+          placeholdersKey,
+          handleUserInput,
+          errorObj,
+          id,
+          placeholdersKey,
+          cardInputStateObj
+        )}
       </div>
 
       <div className="btn-grid-item">
@@ -65,7 +72,14 @@ function renderBtnHandler(btnPropsArg, submitAction) {
     </div>
   );
 }
-function renderPlaceholderJSX(arrToMap, handleUserInputArg, errorObj, cardId) {
+function renderPlaceholderJSX(
+  arrToMap,
+  handleUserInputArg,
+  errorObj,
+  cardId,
+  placeholdersKey,
+  cardInputStateObj
+) {
   //get type of error from errorObj keys
   let errorType = errorObj && Object.keys(errorObj).toString();
   let placeholdersJSX = arrToMap.map((item, index) => {
@@ -77,10 +91,13 @@ function renderPlaceholderJSX(arrToMap, handleUserInputArg, errorObj, cardId) {
           key={index}
           handleUserInput={handleUserInputArg}
           name={item.toLowerCase()}
+          value={mapItemToInput(placeholdersKey, cardInputStateObj)}
         />
 
         {item.toLowerCase() === errorType ? (
-          <div>{toShowError(arrToMap, errorObj)}</div>
+          <div style={{ color: "orangeRed" }}>
+            {toShowError(arrToMap, errorObj)}
+          </div>
         ) : null}
       </>
     );
@@ -113,14 +130,7 @@ function toShowError(arrayToMap, errorObject) {
   return error;
 }
 
-// function mapErrorToInput(inputOptions, errObj) {
-//   // const error = inputOptions.map(item => console.log(item))
-//   inputOptions.map(item => console.log(item.toLowerCase()));
-//   console.log([errObj]);
-// }
-
 function mapErrorToInput(inputOptions, errObj) {
-  console.log(inputOptions);
   var error;
   for (let x in inputOptions) {
     for (let y in errObj) {
@@ -130,8 +140,23 @@ function mapErrorToInput(inputOptions, errObj) {
       // error = inputOptions[x].toLowerCase() === y;
     }
   }
-
+  console.log(error);
   return error;
+}
+
+function mapItemToInput(arrayToMap, inputObj) {
+  // inputObj = inputObj || [];
+  let inputValue;
+
+  for (let x of arrayToMap) {
+    for (let y in inputObj) {
+      if (x.toLowerCase() === y) {
+        inputValue = inputObj[y];
+      }
+    }
+  }
+
+  return inputValue;
 }
 Card.propTypes = {
   inputProps: PropTypes.array.isRequired,

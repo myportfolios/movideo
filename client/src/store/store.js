@@ -4,7 +4,7 @@ import rootReducer from "./reducers";
 // import async from "middlewares/async";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const initialState = {};
+const initialState = { auth: { authenticated: localStorage.getItem("token") } };
 const middleware = [thunk];
 const store = createStore(
   rootReducer, // consist of all the reducers

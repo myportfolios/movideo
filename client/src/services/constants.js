@@ -11,6 +11,10 @@ export const ACTION_KEY_LOGIN = "action_key_login";
 export const ACTION_KEY_POST_REGISTER_ERROR = "register_error";
 export const ACTION_KEY_POST_REGISTER = "registration";
 
+//clear input text
+export const CLEAR_REGISTER_INPUT_FIELDS = "clear_register_input_fields";
+export const SIGN_OUT_USER = "sign_out_user";
+
 export const OSCARS = {
   NOMINATIONS_2012: "2012 NOMINATIONS",
   NOMINATIONS_2011: "2011 NOMINATIONS",

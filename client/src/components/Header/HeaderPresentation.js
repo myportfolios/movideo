@@ -10,7 +10,8 @@ import "./header.scss";
  */
 
 export default function Header(props) {
-  const { getOscarNominations, auth } = props;
+  const { getOscarNominations, loggedIn, signOutUser, pushToHomePage } = props;
+
   const [oscarList, showOscarList] = useState(false);
   return (
     <nav className="header">
@@ -81,13 +82,25 @@ export default function Header(props) {
           )}
         </li>
         <li className="navs--collections">
-          {!!auth && <Link to="/my-collections">COLLECTIONS</Link>}
+          {loggedIn && <Link to="/my-collections">COLLECTIONS</Link>}
         </li>
         {/* <li className="register">
           <a href="">REGISTER</a>
         </li> */}
         <li className="login">
-          <Link to="/login">LOGIN</Link>
+          {!loggedIn ? (
+            <Link to="/login">LOGIN</Link>
+          ) : (
+            <Link
+              to="#"
+              onClick={() => {
+                signOutUser();
+                pushToHomePage();
+              }}
+            >
+              LOGOUT
+            </Link>
+          )}
         </li>
       </ul>
     </nav>

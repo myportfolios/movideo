@@ -3,7 +3,9 @@ import {
   ACTION_KEY_POST_LOGIN,
   ACTION_KEY_POST_LOGIN_ERROR,
   ACTION_KEY_POST_REGISTER,
-  ACTION_KEY_POST_REGISTER_ERROR
+  ACTION_KEY_POST_REGISTER_ERROR,
+  CLEAR_REGISTER_INPUT_FIELDS,
+  SIGN_OUT_USER
 } from "services/constants";
 import { API_URL } from "services/api";
 import { renameKeys } from "utilities/utils";
@@ -39,6 +41,7 @@ export const loginUserAction = (userDetailsObj, callBack) => async dispatch => {
           payload: res.data.token,
           userAction: userDetailsObj.cardId
         });
+        localStorage.setItem("token", res.data.token);
         callBack();
       }
     })
@@ -48,6 +51,13 @@ export const loginUserAction = (userDetailsObj, callBack) => async dispatch => {
         payload: err.response.data
       })
     );
+};
+export const signOutUser = () => {
+  localStorage.clear("token");
+  return {
+    type: SIGN_OUT_USER,
+    payload: ""
+  };
 };
 
 export const registerUserAction = userDetailsObj => async dispatch => {
@@ -74,4 +84,14 @@ export const registerUserAction = userDetailsObj => async dispatch => {
     );
 };
 
+export const clearRegistrationFields = () => {
+  return {
+    type: CLEAR_REGISTER_INPUT_FIELDS,
+    payload: {
+      name: "",
+      email: "",
+      password: ""
+    }
+  };
+};
 //uset setInterval and clearInterval
