@@ -45,11 +45,12 @@ export const loginUserAction = (userDetailsObj, callBack) => async dispatch => {
         callBack();
       }
     })
-    .catch(err =>
-      dispatch({
-        type: ACTION_KEY_POST_LOGIN_ERROR,
-        payload: err.response.data
-      })
+    .catch(
+      err => console.log(err)
+      // dispatch({
+      //   type: ACTION_KEY_POST_LOGIN_ERROR,
+      //   payload: err.response.data
+      // })
     );
 };
 export const signOutUser = () => {

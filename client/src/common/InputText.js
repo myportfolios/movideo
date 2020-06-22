@@ -22,11 +22,15 @@ export default class InputText extends Component {
       name,
       inputValue
     } = this.props;
-    // console.log("state is ", inputValue);
+    console.log("name is ", name);
     return (
       <input
         id={cardId}
-        type="text"
+        type={
+          name === "password" || name === "password re-type"
+            ? "password"
+            : "text"
+        }
         placeholder={placeholder}
         onChange={handleUserInput}
         name={name}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { getOscarNominations } from "store/actions/oscars";
-import { makeOscarCalls } from "utilities/utils";
+import { makeOscarCalls, notUndefined } from "utilities/utils";
 import { Link } from "react-router-dom";
 import "./header.scss";
 /**
@@ -13,6 +13,7 @@ export default function Header(props) {
   const { getOscarNominations, loggedIn, signOutUser, pushToHomePage } = props;
 
   const [oscarList, showOscarList] = useState(false);
+
   return (
     <nav className="header">
       <h1 className="logo">Movideo</h1>
@@ -82,7 +83,9 @@ export default function Header(props) {
           )}
         </li>
         <li className="navs--collections">
-          {loggedIn && <Link to="/my-collections">COLLECTIONS</Link>}
+          {!!notUndefined(loggedIn) && (
+            <Link to="/my-collections">COLLECTIONS</Link>
+          )}
         </li>
         {/* <li className="register">
           <a href="">REGISTER</a>

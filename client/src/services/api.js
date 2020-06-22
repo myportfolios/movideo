@@ -13,7 +13,8 @@ export const API_URL = {
   OCSAR_2009:
     "https://api.themoviedb.org/3/list/9?language=en-US&api_key=2afb1d4ebd6b0b7548fc20dd30d0ac26",
   POST_LOGIN: "http://localhost:5000/api/users/login",
-  POST_REGISTER: "http://localhost:5000/api/users/register"
+  POST_REGISTER: "http://localhost:5000/api/users/register",
+  POST_ADD_MOVIE: "http://localhost:5000/api/collections/add"
 };
 //CONFIGURATION API FOR MOVIES ENDPOINT//
 export const BASE_URL = "http://image.tmdb.org/t/p/";

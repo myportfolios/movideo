@@ -10,6 +10,7 @@ export const ACTION_KEY_POST_LOGIN_ERROR = "action_key_post_login_error";
 export const ACTION_KEY_LOGIN = "action_key_login";
 export const ACTION_KEY_POST_REGISTER_ERROR = "register_error";
 export const ACTION_KEY_POST_REGISTER = "registration";
+export const ACTION_KEY_POST_SAVE_TO_COLLECTIONS = "sav_to_collections";
 
 //clear input text
 export const CLEAR_REGISTER_INPUT_FIELDS = "clear_register_input_fields";
