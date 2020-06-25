@@ -5,6 +5,7 @@ import {
   ACTION_KEY_POST_REGISTER_ERROR,
   SIGN_OUT_USER
 } from "services/constants";
+import isEmpty from "validations/is-empty";
 
 const InitialState = {
   authenticated: "",
@@ -15,10 +16,12 @@ const InitialState = {
 export const userAuthReducer = (state = InitialState, action) => {
   switch (action.type) {
     case ACTION_KEY_POST_LOGIN:
+      console.log(action.payload);
       return {
         ...state,
-        authenticated: action.payload,
-        userAction: action.userAction
+        authenticated: !isEmpty(action.payload),
+        userAction: action.userAction,
+        user: action.payload
       };
     case SIGN_OUT_USER:
       return {

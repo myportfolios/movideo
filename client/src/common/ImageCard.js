@@ -6,6 +6,15 @@ import { connect } from "react-redux";
 import "./card.scss";
 
 export class ImageCard extends React.Component {
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.token) {
+  //     this.props.history.push("my-collections");
+  //   }
+  //   if (nextProps.errors) {
+  //     this.setState({errors:nextProps.errors})
+  //   }
+
+  // }
   renderImageCardJSX(arrayToMap, btnText) {
     const jsx =
       arrayToMap &&
@@ -17,15 +26,21 @@ export class ImageCard extends React.Component {
           year: item.release_date,
           poster: item.poster_path,
           rating: item.vote_average,
-          movieId: item.id
+          movieId: item.id,
+          date: Date.now()
         };
-        const options = {
-          headers: { token: this.props.token }
-        };
-        console.log(options.headers);
+        /**
+         *  {options} object not added to the payload because the token as been configured to be added added to each request following the initial validation
+         * check utils.js file for the setting of Auth token in setAuthToken()
+         * this was achieved using axios  ----> axios.defaults.headers.common["Authorization"] = token;
+         */
+        // const options = {
+        //   headers: { token: this.props.token }
+        // };
+
         const saveToCollectionsHandler = async () => {
           await axios
-            .post(API_URL.POST_ADD_MOVIE, requestBody, options)
+            .post(API_URL.POST_ADD_MOVIE, requestBody)
             .then(res => console.log(res))
             .catch(err => console.log(err.response.data));
           //save the selected movie to db

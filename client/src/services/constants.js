@@ -13,7 +13,7 @@ export const ACTION_KEY_POST_REGISTER = "registration";
 export const ACTION_KEY_POST_SAVE_TO_COLLECTIONS = "sav_to_collections";
 
 //clear input text
-export const CLEAR_REGISTER_INPUT_FIELDS = "clear_register_input_fields";
+// export const CLEAR_REGISTER_INPUT_FIELDS = "clear_register_input_fields";
 export const SIGN_OUT_USER = "sign_out_user";
 
 export const OSCARS = {

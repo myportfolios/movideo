@@ -1,11 +1,7 @@
 import React, { Fragment } from "react";
 import RegistrationLoginCard from "common/RegistrationLoginCard";
 import { accountType } from "services/constants";
-import {
-  loginUserAction,
-  registerUserAction,
-  clearRegistrationFields
-} from "auth/authAction";
+import { loginUserAction, registerUserAction } from "auth/authAction";
 import { connect } from "react-redux";
 
 class LoginRegistrationPage extends React.Component {
@@ -16,7 +12,7 @@ class LoginRegistrationPage extends React.Component {
       //redirect user to collections page
       this.props.history.push("/my-collections");
     });
-    this.props.clearRegistrationFields();
+
     // this.setState({ email: "", password: "" });
     // console.log(this.state.email);
     // console.log(this.state.password);
@@ -24,7 +20,7 @@ class LoginRegistrationPage extends React.Component {
 
   registerEventHandler = () => {
     this.props.registerUserAction(this.state);
-    this.props.clearRegistrationFields();
+
     // this.setState({ state: {} });
   };
   handleUserInput = e => {
@@ -109,6 +105,5 @@ export const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
   loginUserAction,
-  registerUserAction,
-  clearRegistrationFields
+  registerUserAction
 })(LoginRegistrationPage);

@@ -1,4 +1,8 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import store from "store/store";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
 import LandingPageContainer from "components/LandingPage/LandingPageContainer";
 import HeaderContainer from "components/Header/HeaderContainer";
 import RecentMoviesContainer from "components/RecentMovies/RecentMoviesContainer";
@@ -6,13 +10,26 @@ import AtCinemasContainer from "components/AtCinemas/AtCinemasContainer";
 import OscarsContainer from "components/Oscars/OscarsContainer";
 import LoginRegistrationPage from "components/LoginRegistrationPage/LoginRegistrationPage";
 import CollectionsContainer from "components/Collections/CollectionsContainer";
-import NoMatch from "components/NoMatch/NoMatch";
-import { connect } from "react-redux";
-import { notUndefined } from "utilities/utils";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { getJWT } from "utilities/utils";
 import ProtectedRoute from "components/ProtectedRoute/protectedRoute";
+import NoMatch from "components/NoMatch/NoMatch";
+
+import { notUndefined } from "utilities/utils";
+import { getJWT } from "utilities/utils";
+import { setAuthToken } from "utilities/utils";
+import jwt_decode from "jwt-decode";
+import { setCurrentUser } from "auth/authAction";
+
 import "./App.css";
+
+//check for token
+if (localStorage.token) {
+  //Set auth token header auth
+  setAuthToken(localStorage.token);
+  //decode token and get user details and exp info
+  const decoded = jwt_decode(localStorage.token);
+  //set user and authenticated
+  store.dispatch(setCurrentUser(decoded));
+}
 
 class App extends React.Component {
   render() {
@@ -33,14 +50,7 @@ class App extends React.Component {
               component={OscarsContainer}
             />
             <Route exact path="/login" component={LoginRegistrationPage} />
-            {/* {!!notUndefined(isLoggedIn) && (
-              <Route
-                exact
-                path="/my-collections"
-                component={CollectionsContainer}
-              />
-            )}
-            <Route component={NoMatch} />{" "} */}
+            {/* <Route component={NoMatch} />  */}
             <ProtectedRoute>
               <Route
                 exact

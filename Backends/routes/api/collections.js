@@ -81,10 +81,10 @@ router.get("/test", (req, res) => res.json({ msg: "Collection Works" }));
 
 router.get("/movies/logged-user", requireAuth, (req, res) => {
   Collections.find({ user: req.user.id })
-    .then(collections => {
+    .then((collections) => {
       res.json(collections);
     })
-    .catch(err => res.status(400).json("Error: " + err));
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 /*******add new movies endpoint**********/
@@ -96,7 +96,7 @@ router.post("/add", requireAuth, (req, res) => {
   const poster = req.body.poster;
   const rating = Number(req.body.rating);
   const movieId = Number(req.body.movieId);
-  const date = Date.parse(req.body.date);
+  const date = req.body.date;
 
   const newCollections = new Collections({
     user,
@@ -106,13 +106,13 @@ router.post("/add", requireAuth, (req, res) => {
     poster,
     rating,
     movieId,
-    date
+    date,
   });
 
   newCollections
     .save()
     .then(() => res.json("Title added!"))
-    .catch(err => res.status(400).json(`Error: ${err}`));
+    .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
 /*******get a particular movie using its ID endpoint**********/
@@ -120,8 +120,8 @@ router.post("/add", requireAuth, (req, res) => {
 router.get("/movie/:movieId", requireAuth, (req, res) => {
   // Collections.find({ movieId: req.params.movieId })
   Collections.find({ movieId: req.params.movieId })
-    .then(movies => res.json(movies))
-    .catch(err => res.status(400).json(`Error ${err}`));
+    .then((movies) => res.json(movies))
+    .catch((err) => res.status(400).json(`Error ${err}`));
 });
 
 /*******Delete a particular movie using its ID endpoint**********/
@@ -135,7 +135,7 @@ router.delete("/movies/logged-user/:movieId", requireAuth, (req, res) => {
   Collections.find({ user: req.user.id, movieId: req.params.movieId })
     .deleteOne()
     .then(() => res.json("Movie Deleted"))
-    .catch(err => res.status(400).json(`Error ${err}`));
+    .catch((err) => res.status(400).json(`Error ${err}`));
 });
 
 module.exports = router;

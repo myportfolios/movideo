@@ -5,6 +5,7 @@
 
 import { API_URL } from "services/api";
 import { OSCARS } from "services/constants";
+import axios from "axios";
 
 export const getViewPort = () => {
   let viewport = {
@@ -99,3 +100,13 @@ export function renameKeys(obj, newKeys) {
   });
   return Object.assign({}, ...keyValues);
 }
+
+export const setAuthToken = token => {
+  if (token) {
+    //Apply token to every request
+    axios.defaults.headers.common["Authorization"] = token;
+  } else {
+    //Delete auth header
+    delete axios.defaults.headers.common["Authorization"];
+  }
+};

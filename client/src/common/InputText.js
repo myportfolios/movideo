@@ -22,7 +22,7 @@ export default class InputText extends Component {
       name,
       inputValue
     } = this.props;
-    console.log("name is ", name);
+
     return (
       <input
         id={cardId}
