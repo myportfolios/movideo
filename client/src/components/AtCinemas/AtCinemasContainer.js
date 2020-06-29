@@ -5,11 +5,9 @@ import { getMoviesAtCinemas } from "store/actions/atCinemas";
 
 class AtCinemasContainer extends Component {
   componentDidMount() {
-    // console.log(this.props);
     this.props.getMoviesAtCinemas();
   }
   render() {
-    // console.log(this.props.moviesAtCinemas);
     const { moviesAtCinemas: list } = this.props;
     return (
       <div>

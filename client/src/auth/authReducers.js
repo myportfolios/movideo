@@ -16,7 +16,6 @@ const InitialState = {
 export const userAuthReducer = (state = InitialState, action) => {
   switch (action.type) {
     case ACTION_KEY_POST_LOGIN:
-      console.log(action.payload);
       return {
         ...state,
         authenticated: !isEmpty(action.payload),
@@ -45,15 +44,12 @@ export const userRegistrationReducer = (
 ) => {
   switch (action.type) {
     case ACTION_KEY_POST_REGISTER:
-      console.log(action.payload);
       return {
         ...state,
         status: action.payload,
         userAction: action.userAction
       };
     case ACTION_KEY_POST_REGISTER_ERROR:
-      console.log(action.payload);
-
       return {
         ...state,
         errorMessage: action.payload

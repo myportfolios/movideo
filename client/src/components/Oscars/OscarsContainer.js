@@ -8,7 +8,7 @@ class OscarsContainer extends Component {
   };
   componentDidMount() {
     const { oscarsYear: oscarYear } = this.props.match.params;
-    console.log("oscar year is: ", oscarYear);
+
     this.setState({ oscarYear });
   }
   render() {

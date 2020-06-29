@@ -12,10 +12,6 @@ class LoginRegistrationPage extends React.Component {
       //redirect user to collections page
       this.props.history.push("/my-collections");
     });
-
-    // this.setState({ email: "", password: "" });
-    // console.log(this.state.email);
-    // console.log(this.state.password);
   };
 
   registerEventHandler = () => {

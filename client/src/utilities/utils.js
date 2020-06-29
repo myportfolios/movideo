@@ -65,9 +65,6 @@ export const getJWT = () => {
 };
 
 export const makeOscarCalls = yearString => {
-  // console.log(yearString);
-  // console.log(API_URL.OSCAR_2012);
-  // console.log(OSCARS);
   //the event returns the year identifier
   let nominationUrl = "";
   switch (yearString) {
@@ -84,7 +81,7 @@ export const makeOscarCalls = yearString => {
       nominationUrl = API_URL.OSCAR_2012;
       break;
   }
-  // console.log(nominationUrl);
+
   return nominationUrl;
 };
 /***rename keys in an object */

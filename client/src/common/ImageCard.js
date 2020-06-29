@@ -1,25 +1,33 @@
 import React from "react";
 import { BASE_URL, IMAGE_POSTER_SIZES } from "services/api";
+import { getCurrentUserCollections } from "store/actions/collections";
 import axios from "axios";
 import { API_URL } from "services/api";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
 import "./card.scss";
 
 export class ImageCard extends React.Component {
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.token) {
-  //     this.props.history.push("my-collections");
-  //   }
-  //   if (nextProps.errors) {
-  //     this.setState({errors:nextProps.errors})
-  //   }
-
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentLocation: ""
+    };
+  }
+  componentDidMount() {
+    let currentLocation = this.props.history.location.pathname;
+    this.setState({ currentLocation });
+  }
   renderImageCardJSX(arrayToMap, btnText) {
     const jsx =
       arrayToMap &&
       arrayToMap.map(item => {
-        let posterPath = `${BASE_URL}${IMAGE_POSTER_SIZES}${item.poster_path}`;
+        console.log("posterPath", item.poster_path);
+        let posterPath =
+          this.state.currentLocation === "/my-collections"
+            ? `${BASE_URL}${IMAGE_POSTER_SIZES}${item.poster}`
+            : `${BASE_URL}${IMAGE_POSTER_SIZES}${item.poster_path}`;
         const requestBody = {
           title: item.title,
           overview: item.overview,
@@ -41,7 +49,14 @@ export class ImageCard extends React.Component {
         const saveToCollectionsHandler = async () => {
           await axios
             .post(API_URL.POST_ADD_MOVIE, requestBody)
-            .then(res => console.log(res))
+            .then(res =>
+              axios
+                .get(API_URL.GET_CURRENT_USER_COLLECTIONS)
+                .then(response =>
+                  this.props.getCurrentUserCollections(response.data)
+                )
+                .catch(error => console.log(error.respomse.data))
+            )
             .catch(err => console.log(err.response.data));
           //save the selected movie to db
           //if successful, make a get cal to get all the movies for that particular user
@@ -56,24 +71,52 @@ export class ImageCard extends React.Component {
               alt="movie poster"
               className="movie-card_poster"
             />
-            <div className="movie-card_other-items">
-              <h4 className="movie-card_other-items__title">{item.title}</h4>
-              <h4 className="movie-card_other-items__rating">
-                {item.vote_average}
-              </h4>
-              {/* <button className="movie-card_other-items__save-btn">
-              {btnText}
-            </button> */}
-              <a
-                href="#"
-                className="movie-card_other-items__save-btn"
-                onClick={() => {
-                  saveToCollectionsHandler();
-                }}
-              >
-                Save To Collections
-              </a>
-            </div>
+            {/**
+             * @param saveToCollectionsHandler action to be called for ImageCard on other pages
+             * this div will be rendered for other pages
+             */}
+
+            {
+              <>
+                {this.state.currentLocation !== "/my-collections" ? (
+                  <div className="movie-card_other-items">
+                    <h4 className="movie-card_other-items__title">
+                      {item.title}
+                    </h4>
+                    <h4 className="movie-card_other-items__rating">
+                      {item.vote_average}
+                    </h4>
+                    <a
+                      href="#"
+                      className="movie-card_other-items__save-btn"
+                      onClick={() => {
+                        saveToCollectionsHandler();
+                      }}
+                    >
+                      Save To Collections
+                    </a>
+                  </div>
+                ) : (
+                  <div className="movie-card_other-items">
+                    <h4 className="movie-card_other-items__title">
+                      {item.title}
+                    </h4>
+                    <h4 className="movie-card_other-items__rating">
+                      {item.vote_average}
+                    </h4>
+                    <a
+                      href="#"
+                      className="movie-card_other-items__save-btn"
+                      onClick={() => {
+                        saveToCollectionsHandler();
+                      }}
+                    >
+                      Move To Watched
+                    </a>
+                  </div>
+                )}
+              </>
+            }
           </div>
         );
       });
@@ -81,7 +124,7 @@ export class ImageCard extends React.Component {
   }
   render() {
     const { list, propsObj } = this.props;
-    const btnText = propsObj.btnText;
+    const btnText = propsObj && propsObj.btnText;
     return (
       <div className="recent-movies-container">
         {this.renderImageCardJSX(list || [], btnText || {})}
@@ -94,4 +137,8 @@ export const mapStateToProps = state => {
     token: state.auth.authenticated
   };
 };
-export default connect(mapStateToProps, {})(ImageCard);
+
+export default compose(
+  connect(mapStateToProps, { getCurrentUserCollections }),
+  withRouter
+)(ImageCard);

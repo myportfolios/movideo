@@ -79,7 +79,7 @@ class LandingPageContainer extends Component {
 
   registerEventHandler = e => {
     e.preventDefault();
-    console.log("registered");
+
     this.props.registerUserAction(this.state);
   };
   handleUserInput = e => {
