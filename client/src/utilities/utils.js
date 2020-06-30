@@ -66,6 +66,7 @@ export const getJWT = () => {
 
 export const makeOscarCalls = yearString => {
   //the event returns the year identifier
+
   let nominationUrl = "";
   switch (yearString) {
     case OSCARS.NOMINATIONS_2009:

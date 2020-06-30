@@ -23,7 +23,6 @@ export class ImageCard extends React.Component {
     const jsx =
       arrayToMap &&
       arrayToMap.map(item => {
-        console.log("posterPath", item.poster_path);
         let posterPath =
           this.state.currentLocation === "/my-collections"
             ? `${BASE_URL}${IMAGE_POSTER_SIZES}${item.poster}`

@@ -19,13 +19,34 @@ export default function Header(props) {
       <h1 className="logo">Movideo</h1>
       <ul className=" header__navs">
         <li className="navs--home">
-          <Link to="/">HOME</Link>
+          <Link
+            to="/"
+            onClick={() => {
+              showOscarList(oscarList);
+            }}
+          >
+            HOME
+          </Link>
         </li>
         <li className="navs--recent-movies">
-          <Link to="/recent-movies">RECENT MOVIES</Link>
+          <Link
+            to="/recent-movies"
+            onClick={() => {
+              showOscarList(!oscarList);
+            }}
+          >
+            RECENT MOVIES
+          </Link>
         </li>
         <li className="navs--cinemas">
-          <Link to="/at-cinemas">AT CINEMAS</Link>
+          <Link
+            to="/at-cinemas"
+            onClick={() => {
+              showOscarList(!oscarList);
+            }}
+          >
+            AT CINEMAS
+          </Link>
         </li>
         <li
           className="navs--oscar"
@@ -34,7 +55,7 @@ export default function Header(props) {
           }}
         >
           {" "}
-          <Link to="/oscars">OSCARS</Link>
+          <Link to="#">OSCARS</Link>
           {!!oscarList && (
             <ul className="oscar-box">
               <li>
@@ -84,7 +105,14 @@ export default function Header(props) {
         </li>
         <li className="navs--collections">
           {!!notUndefined(loggedIn) && (
-            <Link to="/my-collections">COLLECTIONS</Link>
+            <Link
+              to="/my-collections"
+              onClick={() => {
+                showOscarList(oscarList);
+              }}
+            >
+              COLLECTIONS
+            </Link>
           )}
         </li>
         {/* <li className="register">
@@ -109,3 +137,5 @@ export default function Header(props) {
     </nav>
   );
 }
+
+//fix the bug with display of osacrs_nav by setting it to "false" and not !oscarList

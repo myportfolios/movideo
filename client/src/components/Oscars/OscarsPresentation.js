@@ -6,6 +6,7 @@ import { propsObj } from "services/constants";
 
 export default function OscarsPresentation(props) {
   const { list, oscarYear } = props;
+  // console.log("oscarYear is", oscarYear);
 
   return (
     <Fragment>
