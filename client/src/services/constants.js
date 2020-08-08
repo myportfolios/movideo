@@ -13,6 +13,10 @@ export const ACTION_KEY_POST_REGISTER = "registration";
 export const ACTION_KEY_POST_SAVE_TO_COLLECTIONS = "save_to_collections";
 export const ACTION_KEY_GET_CURRENT_USER_COLLECTIONS =
   "get_current_user_collections";
+export const ACTION_KEY_VALIDATE_CURRENT_USER_TOKEN =
+  "validate_token_for_current_user";
+export const ACTION_KEY_VALIDATE_CURRENT_USER_TOKEN_ERROR =
+  "validate_token_for_current_user_error";
 
 //clear input text
 // export const CLEAR_REGISTER_INPUT_FIELDS = "clear_register_input_fields";

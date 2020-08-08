@@ -6,3 +6,22 @@ body {
   box-sizing: border-box;
   /* z-index: -1; */
 }
+
+/*
+Serves as the parent container for all the rendered ImageCards
+*/
+.images-cards-container {
+  width: 90%;
+
+  display: grid;
+  margin: 0 auto;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 450px);
+  /* align-items: center; */
+  align-items: stretch;
+  grid-gap: 30px;
+  /* justify-content: center; */
+}
+.images-cards-container .movie-card {
+  justify-items: stretch !important;
+}

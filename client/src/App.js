@@ -21,14 +21,17 @@ import { setCurrentUser } from "auth/authAction";
 
 import "./App.css";
 
+//get current date
+var dateNow = new Date();
 //check for token
 if (localStorage.token) {
   //Set auth token header auth
   setAuthToken(localStorage.token);
   //decode token and get user details and exp info
   const decoded = jwt_decode(localStorage.token);
+
   //set user and authenticated
-  store.dispatch(setCurrentUser(decoded));
+  decoded.exp < dateNow.getTime() && store.dispatch(setCurrentUser(decoded));
 }
 
 class App extends React.Component {

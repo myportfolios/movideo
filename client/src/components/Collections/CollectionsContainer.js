@@ -10,7 +10,7 @@ class CollectionsContainer extends Component {
     axios
       .get(API_URL.GET_CURRENT_USER_COLLECTIONS)
       .then(res => this.props.getCurrentUserCollections(res.data))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response.data));
   };
 
   async componentDidMount() {

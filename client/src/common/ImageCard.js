@@ -1,5 +1,9 @@
 import React from "react";
-import { BASE_URL, IMAGE_POSTER_SIZES } from "services/api";
+import {
+  BASE_URL,
+  IMAGE_POSTER_SIZES,
+  COLLECTIONS_POSTER_SIZES
+} from "services/api";
 import { getCurrentUserCollections } from "store/actions/collections";
 import axios from "axios";
 import { API_URL } from "services/api";
@@ -54,7 +58,7 @@ export class ImageCard extends React.Component {
                 .then(response =>
                   this.props.getCurrentUserCollections(response.data)
                 )
-                .catch(error => console.log(error.respomse.data))
+                .catch(error => console.log(error.response.data))
             )
             .catch(err => console.log(err.response.data));
           //save the selected movie to db
@@ -125,7 +129,7 @@ export class ImageCard extends React.Component {
     const { list, propsObj } = this.props;
     const btnText = propsObj && propsObj.btnText;
     return (
-      <div className="recent-movies-container">
+      <div className="images-cards-container">
         {this.renderImageCardJSX(list || [], btnText || {})}
       </div>
     );

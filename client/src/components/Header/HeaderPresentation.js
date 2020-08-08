@@ -22,7 +22,7 @@ export default function Header(props) {
           <Link
             to="/"
             onClick={() => {
-              showOscarList(oscarList);
+              showOscarList(false);
             }}
           >
             HOME
@@ -32,7 +32,7 @@ export default function Header(props) {
           <Link
             to="/recent-movies"
             onClick={() => {
-              showOscarList(!oscarList);
+              showOscarList(false);
             }}
           >
             RECENT MOVIES
@@ -42,7 +42,7 @@ export default function Header(props) {
           <Link
             to="/at-cinemas"
             onClick={() => {
-              showOscarList(!oscarList);
+              showOscarList(false);
             }}
           >
             AT CINEMAS
@@ -108,7 +108,7 @@ export default function Header(props) {
             <Link
               to="/my-collections"
               onClick={() => {
-                showOscarList(oscarList);
+                showOscarList(false);
               }}
             >
               COLLECTIONS
@@ -127,6 +127,7 @@ export default function Header(props) {
               onClick={() => {
                 signOutUser();
                 pushToHomePage();
+                showOscarList(false);
               }}
             >
               LOGOUT

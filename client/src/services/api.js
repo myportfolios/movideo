@@ -16,13 +16,15 @@ export const API_URL = {
   POST_REGISTER: "http://localhost:5000/api/users/register",
   POST_ADD_MOVIE: "http://localhost:5000/api/collections/add",
   GET_CURRENT_USER_COLLECTIONS:
-    "http://localhost:5000/api/collections/movies/logged-user"
+    "http://localhost:5000/api/collections/movies/logged-user",
+  VALIDATE_CURRENT_USER_TOKEN: "http://localhost:5000/api/users/current"
 };
 //CONFIGURATION API FOR MOVIES ENDPOINT//
 export const BASE_URL = "http://image.tmdb.org/t/p/";
 // export const POSTER_SIZES = "w500";
 export const POSTER_SIZES = "w342";
-export const IMAGE_POSTER_SIZES = "w185";
+export const COLLECTIONS_POSTER_SIZES = "w154";
+export const IMAGE_POSTER_SIZES = "w154";
 // export const POSTER_SIZES = "w154";
 // export const POSTER_SIZES = "w185";
 
